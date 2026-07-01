@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>סיטונאות מזוז — טיוטת עמוד בית ותבנית 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ============ פלטת מותג — Global Colors באלמנטור ============ */
+  :root{
+    --primary:  #1E7A3C;  /* ירוק שוק טרי — צבע ראשי */
+    --primary-d:#155C2C;  /* ירוק כהה — hover/כותרות */
+    --deal:     #E03131;  /* אדום מבצעים — הנעה לפעולה */
+    --dark:     #1E2A24;  /* כמעט-שחור ירקרק — טקסט */
+    --bg:       #F7F7F2;  /* שמנת בהירה — רקע */
+    --line:     #E7E5DA;  /* קווי הפרדה */
+    --white:    #FFFFFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Assistant',sans-serif;background:var(--bg);color:var(--dark);line-height:1.65}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{font-weight:800;line-height:1.2}
+  h2{font-size:clamp(26px,4vw,40px)}
+  .kicker{color:var(--primary);font-weight:700;letter-spacing:.1em;font-size:14px;margin-bottom:8px}
+  .sub{font-size:17.5px;color:#4a544d;max-width:620px;margin-top:10px}
+  .btn{display:inline-block;background:var(--primary);color:#fff;font-weight:700;font-size:16.5px;
+       padding:14px 36px;border-radius:12px;text-decoration:none;transition:.2s;border:2px solid var(--primary)}
+  .btn:hover{background:var(--primary-d);border-color:var(--primary-d)}
+  .btn.deal{background:var(--deal);border-color:var(--deal)}
+  .btn.deal:hover{filter:brightness(.88)}
+  .btn.ghost{background:transparent;color:var(--primary);border-color:var(--primary)}
+  .btn.ghost:hover{background:var(--primary);color:#fff}
+  section{padding:76px 0}
+  .ph{background:linear-gradient(135deg,#3f7a52 0%,#2a5c3c 60%,#1c4029 100%);border-radius:18px;display:flex;
+      align-items:center;justify-content:center;color:#d7e8dc;font-size:14px;text-align:center;padding:16px}
+
+  /* topbar + header — בסיס התבנית */
+  .topbar{background:var(--primary-d);color:#fff;font-size:14px;padding:8px 0}
+  .topbar .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  header{background:var(--white);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;box-shadow:0 2px 14px rgba(0,0,0,.04)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:24px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:21px;color:var(--dark);text-decoration:none}
+  .logo .mark{width:42px;height:42px;border-radius:10px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px}
+  .nav ul{display:flex;gap:26px;list-style:none;font-weight:600;font-size:16px}
+  .nav a{color:var(--dark);text-decoration:none}
+  .nav a:hover{color:var(--primary)}
+  .nav .btn{padding:10px 24px;font-size:15px}
+  @media(max-width:860px){.nav ul{display:none}}
+
+  /* hero */
+  .hero{background:var(--white);padding:80px 0 64px}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  .hero h1{font-size:clamp(34px,5.2vw,58px);margin:8px 0 16px}
+  .hero h1 em{font-style:normal;color:var(--primary)}
+  .hero .tag{display:inline-block;background:#FDEBEB;color:var(--deal);font-weight:700;font-size:14.5px;padding:6px 16px;border-radius:99px}
+  .hero .actions{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}
+  .hero .ph{aspect-ratio:5/4}
+  @media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+
+  /* trust strip */
+  .trust{background:var(--primary);color:#fff;padding:20px 0}
+  .trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;text-align:center;font-size:15.5px}
+  .trust b{display:block;font-size:17px}
+  @media(max-width:860px){.trust .wrap{grid-template-columns:repeat(2,1fr)}}
+
+  /* deals */
+  .deals{background:var(--bg)}
+  .deals .head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
+  .deals .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+  .card .imgbox{position:relative}
+  .card .ph{aspect-ratio:1/1;border-radius:0}
+  .card .off{position:absolute;top:12px;right:12px;background:var(--deal);color:#fff;font-weight:800;font-size:14px;padding:6px 14px;border-radius:99px}
+  .card .body{padding:18px}
+  .card h3{font-size:17px}
+  .card .old{color:#98a09a;text-decoration:line-through;font-size:14.5px;margin-inline-start:8px}
+  .card .price{color:var(--deal);font-weight:800;font-size:22px;margin:8px 0 2px}
+  .card .until{font-size:13px;color:#7a837c}
+  @media(max-width:960px){.deals .grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:540px){.deals .grid{grid-template-columns:1fr}}
+
+  /* departments */
+  .depts{background:var(--white)}
+  .depts .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+  .dept{position:relative;border-radius:18px;overflow:hidden;display:block;text-decoration:none}
+  .dept .ph{aspect-ratio:16/10;border-radius:18px}
+  .dept .label{position:absolute;bottom:0;right:0;left:0;padding:16px 20px;background:linear-gradient(0deg,rgba(10,25,15,.85),transparent);color:#fff;font-weight:700;font-size:19px}
+  @media(max-width:860px){.depts .grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:540px){.depts .grid{grid-template-columns:1fr}}
+
+  /* branches */
+  .branches{background:var(--bg)}
+  .branches .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+  .branch{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:30px}
+  .branch h3{font-size:20px;color:var(--primary-d);margin-bottom:6px}
+  .branch .addr{font-weight:600;margin-bottom:12px}
+  .branch table{width:100%;font-size:14.5px;border-collapse:collapse;color:#4a544d}
+  .branch td{padding:3px 0}
+  .branch td:last-child{text-align:left;font-weight:600;color:var(--dark)}
+  .branch .btn{margin-top:16px;width:100%;text-align:center;padding:11px;font-size:15px}
+  @media(max-width:860px){.branches .grid{grid-template-columns:1fr}}
+
+  /* why us */
+  .why{background:var(--primary-d);color:#fff}
+  .why .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+  .why .item{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:30px}
+  .why .num{font-size:38px;font-weight:800;color:#8FD9A8;line-height:1;margin-bottom:12px}
+  .why h3{font-size:19px;margin-bottom:6px}
+  .why p{font-size:15.5px;color:#cfe3d5}
+  .why .kicker{color:#8FD9A8}
+  @media(max-width:860px){.why .grid{grid-template-columns:1fr}}
+
+  /* updates band */
+  .band{background:var(--deal);color:#fff;padding:60px 0;text-align:center}
+  .band h2{font-size:clamp(24px,3.4vw,36px)}
+  .band p{font-size:17px;margin:8px auto 24px;max-width:540px}
+  .band form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .band input{padding:14px 20px;border-radius:12px;border:0;font-family:inherit;font-size:16px;min-width:260px}
+  .band .btn{background:var(--dark);border-color:var(--dark)}
+
+  footer{background:var(--dark);color:#b9c4bd;padding:52px 0 28px;font-size:15px}
+  footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px;margin-bottom:32px}
+  footer h4{color:#fff;margin-bottom:10px;font-size:16px}
+  footer a{color:#b9c4bd;text-decoration:none;display:block;margin-bottom:7px}
+  footer .fine{border-top:1px solid #35423a;padding-top:18px;font-size:13px;text-align:center}
+  @media(max-width:860px){footer .cols{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<!-- ═══ בסיס תבנית: טופ-בר ═══ -->
+<div class="topbar">
+  <div class="wrap">
+    <span>א׳–ד׳ 06:30–20:00 · ה׳ 06:30–21:00 · ו׳ 06:30–14:00</span>
+    <span>להזמנות ובירורים: <b>08-683-8555</b></span>
+  </div>
+</div>
+
+<!-- ═══ בסיס תבנית: הדר (Elementor Theme Builder → Header) ═══ -->
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#"><span class="mark">לוגו</span> סיטונאות מזוז</a>
+    <ul>
+      <li><a href="#">מבצעי השבוע</a></li><li><a href="#">המחלקות</a></li>
+      <li><a href="#">הסניפים</a></li><li><a href="#">אודות</a></li><li><a href="#">צור קשר</a></li>
+    </ul>
+    <a class="btn deal" href="#">למבצעים החמים</a>
+  </div>
+</header>
+
+<!-- ═══ בלוק 1: HERO ═══ -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="tag">המבצעים מתחדשים כל שבוע</span>
+      <h1>הסופר של יבנה.<br><em>מחירים סיטונאיים</em>, שירות של שכונה.</h1>
+      <p class="sub">שלושה סניפים ברחבי העיר, מבצעים שמתחלפים מדי שבוע לפי מה שאתם באמת קונים, ושירות אישי שמכיר אתכם בשם. ככה עושים קניות ביבנה.</p>
+      <div class="actions">
+        <a class="btn deal" href="#">למבצעי השבוע</a>
+        <a class="btn ghost" href="#">מצאו את הסניף הקרוב</a>
+      </div>
+    </div>
+    <div class="ph">תמונת הירו: דוכן ירקות/מעברי החנות — צילום אמיתי מהסניף</div>
+  </div>
+</section>
+
+<!-- ═══ בלוק 2: פס אמון ═══ -->
+<div class="trust">
+  <div class="wrap">
+    <div><b>3 סניפים</b>בכל רחבי יבנה</div>
+    <div><b>מבצעים מתחלפים</b>כל שבוע מחדש</div>
+    <div><b>כשרות</b>רבנות מקומית</div>
+    <div><b>עסק משפחתי</b>שירות אישי, פנים מוכרות</div>
+  </div>
+</div>
+
+<!-- ═══ בלוק 3: מבצעי השבוע ═══ -->
+<section class="deals">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <div class="kicker">מבצעי השבוע</div>
+        <h2>שווה להקדים — זה נגמר מהר</h2>
+      </div>
+      <a class="btn ghost" href="#">לכל המבצעים</a>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="imgbox"><div class="ph">תמונת מוצר</div><span class="off">-30%</span></div>
+        <div class="body"><h3>שם מוצר לדוגמה</h3><div class="price">₪— <span class="old">₪—</span></div><div class="until">בתוקף עד יום שישי</div></div></div>
+      <div class="card"><div class="imgbox"><div class="ph">תמונת מוצר</div><span class="off">1+1</span></div>
+        <div class="body"><h3>שם מוצר לדוגמה</h3><div class="price">₪— <span class="old">₪—</span></div><div class="until">בתוקף עד יום שישי</div></div></div>
+      <div class="card"><div class="imgbox"><div class="ph">תמונת מוצר</div><span class="off">-25%</span></div>
+        <div class="body"><h3>שם מוצר לדוגמה</h3><div class="price">₪— <span class="old">₪—</span></div><div class="until">בתוקף עד יום שישי</div></div></div>
+      <div class="card"><div class="imgbox"><div class="ph">תמונת מוצר</div><span class="off">3 ב־₪—</span></div>
+        <div class="body"><h3>שם מוצר לדוגמה</h3><div class="price">₪— <span class="old">₪—</span></div><div class="until">בתוקף עד יום שישי</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ בלוק 4: המחלקות שלנו ═══ -->
+<section class="depts">
+  <div class="wrap">
+    <div class="kicker">המחלקות שלנו</div>
+    <h2>הכל תחת קורת גג אחת</h2>
+    <div class="grid">
+      <a class="dept" href="#"><div class="ph">תמונה</div><span class="label">ירקות ופירות טריים</span></a>
+      <a class="dept" href="#"><div class="ph">תמונה</div><span class="label">מעדנייה ומוצרי חלב</span></a>
+      <a class="dept" href="#"><div class="ph">תמונה</div><span class="label">קצבייה ועופות</span></a>
+      <a class="dept" href="#"><div class="ph">תמונה</div><span class="label">מאפים ולחמים</span></a>
+      <a class="dept" href="#"><div class="ph">תמונה</div><span class="label">בייבי מזוז — לתינוק ולבית</span></a>
+      <a class="dept" href="#"><div class="ph">תמונה</div><span class="label">חד־פעמי ומוצרי בית</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ בלוק 5: הסניפים ═══ -->
+<section class="branches">
+  <div class="wrap">
+    <div class="kicker">הסניפים שלנו ביבנה</div>
+    <h2>תמיד יש מזוז קרוב אליכם</h2>
+    <div class="grid">
+      <div class="branch">
+        <h3>מזוז האומן</h3><div class="addr">האומן 1, יבנה</div>
+        <table>
+          <tr><td>א׳–ד׳</td><td>06:30–20:00</td></tr>
+          <tr><td>ה׳</td><td>06:30–21:00</td></tr>
+          <tr><td>ו׳ וערבי חג</td><td>06:30–14:00</td></tr>
+        </table>
+        <a class="btn" href="#">ניווט בוויז</a>
+      </div>
+      <div class="branch">
+        <h3>מזוז הדרור</h3><div class="addr">הדרור 25, יבנה</div>
+        <table>
+          <tr><td>א׳–ד׳</td><td>06:30–20:00</td></tr>
+          <tr><td>ה׳</td><td>06:30–21:00</td></tr>
+          <tr><td>ו׳ וערבי חג</td><td>06:30–14:00</td></tr>
+        </table>
+        <a class="btn" href="#">ניווט בוויז</a>
+      </div>
+      <div class="branch">
+        <h3>בייבי מזוז</h3><div class="addr">שבזי 2, יבנה</div>
+        <table>
+          <tr><td>א׳–ד׳</td><td>06:30–20:00</td></tr>
+          <tr><td>ה׳</td><td>06:30–21:00</td></tr>
+          <tr><td>ו׳ וערבי חג</td><td>06:30–14:00</td></tr>
+        </table>
+        <a class="btn" href="#">ניווט בוויז</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ בלוק 6: למה מזוז ═══ -->
+<section class="why">
+  <div class="wrap">
+    <div class="kicker">למה קונים במזוז</div>
+    <h2>סיטונאות במחיר. שכונה בלב.</h2>
+    <div class="grid">
+      <div class="item"><div class="num">01</div><h3>מחירים סיטונאיים לכולם</h3><p>אנחנו קונים בגדול — ואתם משלמים פחות. בלי כרטיס מועדון, בלי אותיות קטנות.</p></div>
+      <div class="item"><div class="num">02</div><h3>מבצעים לפי מה שאתם צריכים</h3><p>המבצעים נבנים כל שבוע לפי הביקוש של הלקוחות שלנו — לא לפי מה שנשאר במחסן.</p></div>
+      <div class="item"><div class="num">03</div><h3>עסק משפחתי מיבנה</h3><p>מזוז אליהו ובנו — עסק של העיר הזאת. מכירים את הלקוחות בשם, ותמיד יש מי שיעזור.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ בלוק 7: עדכוני מבצעים ═══ -->
+<div class="band">
+  <div class="wrap">
+    <h2>המבצעים של שבוע הבא — אצלכם בוואטסאפ</h2>
+    <p>השאירו טלפון וקבלו את עלון המבצעים לפני כולם. בלי ספאם — רק חיסכון.</p>
+    <form onsubmit="return false">
+      <input type="tel" placeholder="מספר הטלפון שלכם">
+      <a class="btn" href="#">צרפו אותי</a>
+    </form>
+  </div>
+</div>
+
+<!-- ═══ בסיס תבנית: פוטר (Theme Builder → Footer) ═══ -->
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>סיטונאות מזוז</h4><p>רשת הסופרמרקטים של יבנה — מחירים סיטונאיים ושירות אישי, משנת דור.<br>כשרות רבנות מקומית.</p></div>
+      <div><h4>ניווט</h4><a href="#">מבצעי השבוע</a><a href="#">המחלקות</a><a href="#">הסניפים</a><a href="#">אודות</a></div>
+      <div><h4>סניפים</h4><a href="#">האומן 1, יבנה</a><a href="#">הדרור 25, יבנה</a><a href="#">שבזי 2 (בייבי מזוז)</a></div>
+      <div><h4>דברו איתנו</h4><a href="tel:086838555">08-683-8555</a><a href="#">וואטסאפ</a><a href="#">אינסטגרם @mazuzyavne</a><a href="#">פייסבוק</a></div>
+    </div>
+    <div class="fine">© סיטונאות מזוז יבנה 2026 · כל הזכויות שמורות</div>
+  </div>
+</footer>
+
+</body>
+</html>

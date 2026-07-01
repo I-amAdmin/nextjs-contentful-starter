@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>דרך השמש — מבצעי יולי · פיד פייסבוק 1080×1080</title>
+<style>
+  /* פלטה מתוך הלוגו והאריזות: ירוק-זית מהלוגו, קרם מאריזת הלובקה, אדום-מבצע מהטחינה */
+  :root{
+    --olive:   #8B8B4A;
+    --olive-d: #6E6E38;
+    --ink:     #2E2B25;
+    --cream:   #F4EDC9;
+    --cream-l: #FAF6E3;
+    --red:     #C8332B;
+    --white:   #FFFFFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1080px;overflow:hidden}
+  body{font-family:'Assistant','Liberation Sans',Arial,sans-serif;background:var(--cream-l);color:var(--ink);
+       display:flex;flex-direction:column}
+
+  /* ── כותרת ── */
+  .top{background:var(--olive);color:var(--white);padding:26px 44px 22px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:flex;align-items:center;gap:18px}
+  .brand img{height:86px;width:auto;display:block}
+  .brand .ph-logo{height:86px;min-width:180px;background:rgba(255,255,255,.14);border:2px dashed rgba(255,255,255,.55);
+      border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:17px;padding:0 18px}
+  .headline{text-align:left}
+  .headline h1{font-size:78px;font-weight:800;line-height:1;letter-spacing:-1px}
+  .headline p{font-size:23px;margin-top:6px;color:#F0EDD2;font-weight:600}
+
+  /* ── מוצרים מצולמים ── */
+  .featured{display:flex;gap:20px;padding:26px 44px 6px}
+  .fcard{flex:1;background:var(--white);border:2px solid var(--olive);border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
+  .fimg{height:196px;background:var(--cream);display:flex;align-items:center;justify-content:center;position:relative}
+  .fimg img{max-height:100%;max-width:100%;object-fit:contain;display:block}
+  .fimg .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--olive-d);
+      font-size:17px;font-weight:600;text-align:center;padding:12px;border-bottom:2px dashed var(--olive)}
+  .fbody{padding:14px 18px 16px;text-align:center}
+  .fbody h3{font-size:24px;font-weight:800;margin-bottom:6px}
+  .fprice{color:var(--red);font-weight:800;font-size:34px;line-height:1}
+  .fprice small{font-size:18px;color:var(--ink);font-weight:600}
+  .frow{display:flex;justify-content:space-between;font-size:20px;font-weight:700;padding:2px 6px}
+  .frow b{color:var(--red);font-size:22px}
+
+  /* ── רשימת מבצעים ── */
+  .list{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;padding:20px 44px 6px}
+  .item{background:var(--white);border:1.5px solid var(--olive);border-radius:14px;padding:10px 18px;
+        display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .item span{font-size:21.5px;font-weight:700}
+  .item b{color:var(--red);font-size:25px;font-weight:800;white-space:nowrap}
+  .item b small{font-size:15px;color:var(--ink);font-weight:600}
+
+  /* ── מבצע סניף היוצרים ── */
+  .special{margin:14px 44px 0;background:var(--ink);color:var(--cream-l);border-radius:16px;
+           padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .special .txt{font-size:22px;font-weight:700}
+  .special .txt small{display:block;font-size:16.5px;font-weight:400;color:#CFC9B4;margin-top:2px}
+  .special .price{background:var(--red);color:#fff;border-radius:12px;padding:10px 20px;font-size:27px;font-weight:800;white-space:nowrap}
+  .special .price small{font-size:16px;font-weight:600}
+
+  /* ── תחתית ── */
+  .foot{margin-top:auto;background:var(--olive);color:var(--white);text-align:center;padding:18px 44px 20px}
+  .foot .url{font-size:30px;font-weight:800;letter-spacing:.02em}
+  .foot .addr{font-size:20.5px;margin-top:5px;font-weight:600;color:#F0EDD2}
+  .foot .note{font-size:14.5px;margin-top:6px;color:#E3DFC2}
+</style>
+</head>
+<body>
+
+  <div class="top">
+    <div class="brand">
+      <!-- שימו כאן את קובץ הלוגו המצורף בשם logo.png באותה תיקייה -->
+      <img src="logo.png" alt="דרך השמש" onload="this.nextElementSibling.remove()" onerror="this.remove()">
+      <div class="ph-logo">לוגו דרך השמש<br>(logo.png)</div>
+    </div>
+    <div class="headline">
+      <h1>מבצעי יולי</h1>
+      <p>טרי מהקלייה · בסניפי כפר סבא · עד גמר המלאי</p>
+    </div>
+  </div>
+
+  <div class="featured">
+    <div class="fcard">
+      <div class="fimg"><img src="lubeca.png" alt="" onload="this.nextElementSibling.remove()" onerror="this.remove()"><div class="ph">תמונת שוקולד לובקה<br>(lubeca.png)</div></div>
+      <div class="fbody">
+        <h3>שוקולד לובקה</h3>
+        <div class="frow"><span>‎60%‎ מריר</span><b>‎7.9 ₪‎</b></div>
+        <div class="frow"><span>‎70%‎ מריר</span><b>‎8.5 ₪‎</b></div>
+        <div class="frow"><span>‎85%‎ מריר</span><b>‎9.9 ₪‎</b></div>
+      </div>
+    </div>
+    <div class="fcard">
+      <div class="fimg"><img src="tahina.png" alt="" onload="this.nextElementSibling.remove()" onerror="this.remove()"><div class="ph">תמונת טחינה הר ברכה<br>(tahina.png)</div></div>
+      <div class="fbody">
+        <h3>טחינה הר ברכה</h3>
+        <div class="fprice">‎29.90 ₪‎</div>
+      </div>
+    </div>
+    <div class="fcard">
+      <div class="fimg"><img src="kabukim.png" alt="" onload="this.nextElementSibling.remove()" onerror="this.remove()"><div class="ph">תמונת קבוקים<br>(kabukim.png)</div></div>
+      <div class="fbody">
+        <h3>קבוקים</h3>
+        <div class="fprice">‎2.9 ₪‎</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="list">
+    <div class="item"><span>חליטות פירות קר — פירות יער / פומלה מלון</span><b>‎8.2 ₪‎</b></div>
+    <div class="item"><span>שום גבישי דק</span><b>‎7.9 ₪‎</b></div>
+    <div class="item"><span>קרקר אזוקי עשיר בחלבון</span><b>‎8.2 ₪‎</b></div>
+    <div class="item"><span>גרנולת הבית ללא תוספת סוכר</span><b>‎4.9 ₪‎ <small>לקילו</small></b></div>
+    <div class="item"><span>אגוז מלך קליפורניה</span><b>‎4.9 ₪‎</b></div>
+    <div class="item"><span>בוטן אמריקאי</span><b>‎2.9 ₪‎</b></div>
+  </div>
+
+  <div class="special">
+    <div class="txt">שקד טחון קלוי — סניף היוצרים בלבד
+      <small>בקנייה מעל ‎39 ₪‎ · מוגבל ל־3 ק"ג ללקוח</small>
+    </div>
+    <div class="price">‎37 ₪‎ <small>לקילו</small></div>
+  </div>
+
+  <div class="foot">
+    <div class="url">www.d-shemesh.com</div>
+    <div class="addr">רחוב ויצמן 121, כפר סבא &nbsp;·&nbsp; רחוב היוצרים 2, כפר סבא</div>
+    <div class="note">כשרות בד״צ בית יוסף · המבצעים עד גמר המלאי · ט.ל.ח</div>
+  </div>
+
+</body>
+</html>

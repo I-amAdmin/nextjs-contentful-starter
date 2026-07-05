@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מבצעי חודש יולי | דרך השמש</title>
+<meta name="description" content="מבצעי החודש בדרך השמש — כפר סבא">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ============ צבעי המותג של דרך השמש ============ */
+  :root {
+    --olive-dark: #3F3F2C;   /* זית כהה */
+    --olive: #666644;        /* זית */
+    --olive-gold: #A6A263;   /* זהב־זית */
+    --olive-soft: #8a874e;   /* זית בהיר לטקסט משני */
+    --cream: #F5F0E1;        /* קרם */
+    --line: #EAE5D3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Assistant', -apple-system, 'Segoe UI', Arial, sans-serif;
+    background: var(--cream);
+    color: var(--olive-dark);
+    line-height: 1.5;
+  }
+  .strip {
+    background: var(--olive-dark);
+    color: var(--cream);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 16px;
+  }
+  header {
+    background: #fff;
+    border-bottom: 4px solid var(--olive-gold);
+    text-align: center;
+    padding: 36px 24px 32px;
+  }
+  .brand-name { font-size: 26px; font-weight: 800; letter-spacing: 1px; margin-top: 12px; }
+  .brand-tagline { font-size: 14px; color: var(--olive); margin-top: 2px; }
+  h1 { font-size: 38px; font-weight: 800; margin-top: 22px; }
+  .subtitle { font-size: 20px; color: var(--olive); margin-top: 8px; }
+  main { max-width: 720px; margin: 0 auto; padding: 0 16px 64px; }
+  h2 { font-size: 24px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+  .section-note { font-size: 14px; font-weight: 700; color: var(--olive-soft); margin: 2px 0 16px; }
+
+  /* ============ מבצעים מיוחדים עם תמונה ============ */
+  .featured { margin-top: 32px; }
+  .featured-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+  @media (min-width: 560px) { .featured-grid { grid-template-columns: 1fr 1fr; } }
+  .featured-card {
+    background: #fff;
+    border: 2px solid var(--olive-gold);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(63,63,44,.08);
+  }
+  .featured-photo {
+    position: relative;
+    height: 180px;
+    background: var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 72px;
+  }
+  .featured-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .featured-body { padding: 16px 20px 20px; }
+  .featured-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .featured-name { font-size: 19px; font-weight: 700; }
+  .featured-note { font-size: 14px; color: var(--olive); margin-top: 8px; }
+
+  .price { white-space: nowrap; }
+  .price .shekel { font-size: 14px; font-weight: 700; color: var(--olive-soft); }
+  .price .amount { font-size: 26px; font-weight: 800; color: var(--olive-dark); }
+  .price .unit { font-size: 12px; color: var(--olive); }
+
+  /* ============ רשימות מבצעים ============ */
+  section.deals { margin-top: 40px; }
+  .deals-header {
+    background: var(--olive);
+    color: var(--cream);
+    font-size: 20px;
+    font-weight: 800;
+    padding: 12px 20px;
+    border-radius: 18px 18px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .deals ul {
+    list-style: none;
+    background: #fff;
+    border-radius: 0 0 18px 18px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(63,63,44,.08);
+  }
+  .deals li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .deals li:last-child { border-bottom: none; }
+  .item-name { font-weight: 600; }
+  .item-note { font-size: 14px; color: var(--olive-soft); margin-top: 2px; }
+
+  /* ============ סניפים ============ */
+  .branches { margin-top: 48px; }
+  .branches-grid { display: grid; gap: 16px; grid-template-columns: 1fr; margin-top: 16px; }
+  @media (min-width: 560px) { .branches-grid { grid-template-columns: 1fr 1fr; } }
+  .branch {
+    display: block;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: var(--olive-dark);
+    box-shadow: 0 1px 3px rgba(63,63,44,.08);
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .branch:hover { border-color: var(--olive-gold); box-shadow: 0 3px 8px rgba(63,63,44,.15); }
+  .branch .name { font-weight: 700; }
+  .branch .address { color: var(--olive); margin-top: 2px; }
+  .branch .waze { font-size: 14px; font-weight: 700; color: var(--olive-soft); margin-top: 10px; }
+
+  footer {
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 1px solid #DCD6C0;
+    text-align: center;
+    font-size: 14px;
+    color: var(--olive);
+  }
+  .site-btn {
+    display: inline-block;
+    margin-top: 16px;
+    background: var(--olive);
+    color: var(--cream);
+    font-weight: 700;
+    text-decoration: none;
+    padding: 10px 28px;
+    border-radius: 999px;
+  }
+  .site-btn:hover { background: var(--olive-dark); }
+</style>
+</head>
+<body>
+
+<!-- פס עליון: תוקף המבצעים -->
+<div class="strip">המבצעים בתוקף במהלך חודש יולי או עד גמר המלאי</div>
+
+<header>
+  <!-- סמל בהשראת הלוגו -->
+  <svg viewBox="0 0 120 64" width="96" aria-hidden="true">
+    <path d="M8 58 Q10 38 24 28 Q30 12 45 14 Q52 2 62 8 Q72 2 80 12 Q95 12 100 28 Q112 38 112 58 Z" fill="#A6A263"/>
+    <path d="M60 58 Q58 40 60 30 M60 38 Q50 34 46 26 Q56 26 60 34 M60 32 Q68 28 72 20 Q62 22 60 30" stroke="#3F3F2C" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="4" y="58" width="112" height="3" rx="1.5" fill="#3F3F2C"/>
+  </svg>
+  <div class="brand-name">דרך השמש</div>
+  <div class="brand-tagline">תבלינים · קטניות · מבצעים · פיצוחים · מארזים</div>
+
+  <!-- ======== כותרת החודש — משנים כאן בכל חודש ======== -->
+  <h1>מבצעי חודש יולי</h1>
+  <div class="subtitle">מבצעים שלא כדאי לפספס 😎</div>
+</header>
+
+<main>
+
+  <!-- ==================================================
+       מבצעים מיוחדים (עם תמונות!)
+       כדי להוסיף תמונה אמיתית של מוצר:
+       1. נכנסים לעמוד המוצר באתר d-shemesh.com
+       2. קליק ימני על התמונה ← "העתקת כתובת התמונה"
+       3. מדביקים את הכתובת במקום ה-# שבתוך src="#"
+       זהו! התמונה תופיע אוטומטית.
+       (בלי תמונה — יוצג האימוג'י שממלא את המקום)
+       ================================================== -->
+  <section class="featured">
+    <h2>⭐ מבצעים מיוחדים</h2>
+    <p class="section-note">בסניף היוצרים בלבד</p>
+    <div class="featured-grid">
+
+      <div class="featured-card">
+        <div class="featured-photo">
+          🌰
+          <img src="#" alt="שקד טחון טהור" onerror="this.style.display='none'">
+        </div>
+        <div class="featured-body">
+          <div class="featured-top">
+            <div class="featured-name">שקד טחון טהור</div>
+            <div class="price"><span class="shekel">₪</span> <span class="amount">37</span> <span class="unit">לק"ג</span></div>
+          </div>
+          <div class="featured-note">בקנייה מעל ₪39 · מוגבל ל־3 ק"ג</div>
+        </div>
+      </div>
+
+      <div class="featured-card">
+        <div class="featured-photo">
+          🥜
+          <img src="#" alt="אגוז מלך קליפורניה" onerror="this.style.display='none'">
+        </div>
+        <div class="featured-body">
+          <div class="featured-top">
+            <div class="featured-name">אגוז מלך קליפורניה</div>
+            <div class="price"><span class="shekel">₪</span> <span class="amount">4.9</span> <span class="unit">ל־100 גרם</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================================================
+       קבוצת מבצעים: שוקולד לובקה
+       כל מבצע הוא שורת <li> — אפשר להעתיק/למחוק שורות
+       ================================================== -->
+  <section class="deals">
+    <div class="deals-header">🍫 שוקולד לובקה</div>
+    <ul>
+      <li>
+        <span class="item-name">שוקולד לובקה 60%</span>
+        <span class="price"><span class="shekel">₪</span> <span class="amount">7.9</span> <span class="unit">ל־100 גרם</span></span>
+      </li>
+      <li>
+        <span class="item-name">שוקולד לובקה 70%</span>
+        <span class="price"><span class="shekel">₪</span> <span class="amount">8.5</span> <span class="unit">ל־100 גרם</span></span>
+      </li>
+      <li>
+        <span class="item-name">שוקולד לובקה 85%</span>
+        <span class="price"><span class="shekel">₪</span> <span class="amount">9.9</span> <span class="unit">ל־100 גרם</span></span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ================ מבצעי דרך השמש ================ -->
+  <section class="deals">
+    <div class="deals-header">✨ מבצעי דרך השמש</div>
+    <ul>
+      <li>
+        <div>
+          <div class="item-name">חליטות פירות קר</div>
+          <div class="item-note">פירות יער / פומלה־מלון</div>
+        </div>
+        <span class="price"><span class="shekel">₪</span> <span class="amount">8.2</span></span>
+      </li>
+      <li>
+        <span class="item-name">טחינה הר ברכה</span>
+        <span class="price"><span class="shekel">₪</span> <span class="amount">29.9</span></span>
+      </li>
+      <li>
+        <span class="item-name">שום גבישי דק</span>
+        <span class="price"><span class="shekel">₪</span> <span class="amount">7.9</span></span>
+      </li>
+      <li>
+        <span class="item-name">קרקר אזוקי עשיר בחלבון</span>
+        <span class="price"><span class="shekel">₪</span> <span class="amount">8.2</span></span>
+      </li>
+      <li>
+        <span class="item-name">גרנולת הבית ללא תוספת סוכר</span>
+        <span class="price"><span class="shekel">₪</span> <span class="amount">4.9</span> <span class="unit">ל־100 גרם</span></span>
+      </li>
+      <li>
+        <span class="item-name">קבוקים</span>
+        <span class="price"><span class="shekel">₪</span> <span class="amount">2.9</span> <span class="unit">ל־100 גרם</span></span>
+      </li>
+      <li>
+        <span class="item-name">אגוז מלך קליפורניה</span>
+        <span class="price"><span class="shekel">₪</span> <span class="amount">4.9</span> <span class="unit">ל־100 גרם</span></span>
+      </li>
+      <li>
+        <span class="item-name">בוטן אמריקאי</span>
+        <span class="price"><span class="shekel">₪</span> <span class="amount">2.9</span> <span class="unit">ל־100 גרם</span></span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ================ סניפים ================ -->
+  <section class="branches">
+    <h2>📍 מחכים לכם בסניפים</h2>
+    <div class="branches-grid">
+      <a class="branch" href="https://waze.com/ul?q=%D7%95%D7%99%D7%A6%D7%9E%D7%9F%20121%2C%20%D7%9B%D7%A4%D7%A8%20%D7%A1%D7%91%D7%90&navigate=yes" target="_blank" rel="noopener">
+        <div class="name">סניף ויצמן</div>
+        <div class="address">ויצמן 121, כפר סבא</div>
+        <div class="waze">ניווט עם Waze ←</div>
+      </a>
+      <a class="branch" href="https://waze.com/ul?q=%D7%94%D7%99%D7%95%D7%A6%D7%A8%D7%99%D7%9D%202%2C%20%D7%9B%D7%A4%D7%A8%20%D7%A1%D7%91%D7%90&navigate=yes" target="_blank" rel="noopener">
+        <div class="name">סניף היוצרים</div>
+        <div class="address">היוצרים 2, כפר סבא</div>
+        <div class="waze">ניווט עם Waze ←</div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>המבצעים בתוקף במהלך חודש יולי או עד גמר המלאי.</p>
+    <p>ט.ל.ח · התמונות להמחשה בלבד</p>
+    <a class="site-btn" href="https://www.d-shemesh.com/">לאתר דרך השמש ←</a>
+  </footer>
+
+</main>
+</body>
+</html>

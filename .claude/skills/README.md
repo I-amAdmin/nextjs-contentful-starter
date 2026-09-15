@@ -4,8 +4,9 @@ Skills in this directory are copied ("vendored") from open-source projects. Each
 directory is named after the `name:` field in its `SKILL.md`, which is the name
 Claude Code uses to invoke the skill.
 
-Two upstreams are vendored here. Both are MIT licensed; the license texts are
-kept alongside as `LICENSE-taste-skill` and `LICENSE-emilkowalski-skills`.
+Three upstreams are vendored here. Two are MIT (`LICENSE-taste-skill`,
+`LICENSE-emilkowalski-skills`); Impeccable is Apache 2.0 and keeps its license and
+NOTICE inside its own skill directory.
 
 ---
 
@@ -58,6 +59,42 @@ kept alongside as `LICENSE-taste-skill` and `LICENSE-emilkowalski-skills`.
 
 ---
 
+## 3. pbakaus/impeccable — design fluency (skill + agents)
+
+- Upstream: https://github.com/pbakaus/impeccable · https://impeccable.style
+- License: **Apache 2.0** — Paul Bakaus (kept as `impeccable/LICENSE` and `impeccable/NOTICE.md`)
+- Vendored from commit `0a4e72a254f3b175c95b36b82e5f2e60fa63f116` (2026-09-15), plugin version 4.3.1
+- Upstream install for Claude Code: `/plugin marketplace add pbakaus/impeccable`, then install it from `/plugin`
+
+Unlike the two packs above, this is a single skill (`impeccable`) with 24 sub-commands,
+plus four subagents in `../agents/`:
+
+| Component | What it does |
+| --- | --- |
+| `impeccable` (skill) | Design direction, critique, audit, polish, harden, adapt, animate, typeset, colorize, live browser iteration. Invoke as `/impeccable <command> [target]`. |
+| `impeccable-finish-reviewer` (agent) | Reviews a finished build against its direction contract and quality bar. |
+| `impeccable-documenter` (agent) | Writes `DESIGN.md` from the shipped artifact. |
+| `impeccable-asset-producer` (agent) | Produces reusable raster assets from approved mock references. |
+| `impeccable-manual-edit-applier` (agent) | Applies live manual copy-edit batches back to source. |
+
+### Hooks are deliberately NOT installed
+
+Upstream ships `PostToolUse` (on `Edit`/`Write`) and `Stop` hooks that run
+`skills/impeccable/scripts/impeccable hook`. That launcher executes an engine binary
+which, if not already present, is downloaded on first run from
+`https://github.com/pbakaus/impeccable/releases` into `~/.impeccable/bin/` and verified
+against a `.sha256` sidecar before it runs.
+
+Those hooks were **not** committed here, so nothing runs automatically and no binary is
+fetched unless you invoke the skill yourself. To enable them later, add upstream's
+`.claude/settings.json` from the same commit.
+
+The skill's own `Setup` step also calls that launcher once per session. If the binary is
+unavailable the skill says so and falls back to reading `PRODUCT.md` / `DESIGN.md`
+directly, so it degrades rather than failing.
+
+---
+
 ## Updating
 
 Re-clone the upstream and re-copy each `skills/<folder>/` into the directory named
@@ -66,6 +103,7 @@ by its `SKILL.md` `name:` field, then bump the commit SHA recorded above:
 ```sh
 git clone --depth 1 https://github.com/emilkowalski/skill /tmp/emil-skill
 git clone --depth 1 https://github.com/Leonxlnx/taste-skill /tmp/taste-skill
+git clone --depth 1 https://github.com/pbakaus/impeccable /tmp/impeccable
 ```
 
 The upstream `npx skills add ...` commands install into `~/.claude/skills/` on a

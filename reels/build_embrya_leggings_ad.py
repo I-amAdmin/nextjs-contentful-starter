@@ -33,6 +33,7 @@ N = {k: f"{k}-720x960.jpg" for k in ["ZOE_NOIR-SF411_LG411_8small", "ZOE_TERRACO
                                        "LIBERTY1", "IMG_5838", "IMG_6460", "IMG_2475", "IMG_2422", "IMG_4508", "IMG_1658",
                                        "IMG_1786", "IMG_1767", "IMG_1604", "IMG_1522", "navy", "light-grey", "legging1", "רכיבה1", "רכיבה2"]}
 N["brown_straight"] = "טייץ-ישר-חום-קטן-720x960.jpg"
+N["brown_biker"] = "brown_biker_user.jpg"   # supplied by the client for the "לספורט" beat
 
 
 def grade(im):
@@ -299,7 +300,7 @@ SEG = [
     (single("ZOE_NOIR-SF411_LG411_8small", cx=0.45, cap=["חופש תנועה מלא", "ונוחות לאורך כל היום"]), 2.2, whip(1), 0.30),
     (single("ZOE_TERRACOTTA-SF411_04small", cx=0.5, z=(1.08, 1.0), cap=["רך במיוחד", "מחבק בעדינות את הבטן"]), 2.2, rubber, 0.45),
     (single("IMG_1658", box=(170, 0, 380), z=(1.0, 1.1), cap=["התפרים עוברים מתחת לבטן", "ולא לוחצים"], cy=0.55), 2.2, soft_flash, 0.25),
-    (beats([("לעבודה", "navy", 0.5), ("ליומיום", "IMG_1786", 0.5), ("לספורט", "רכיבה1", 0.5), ("ולבית", "LIBERTY5", 0.5)]), 2.4, rubber, 0.45),
+    (beats([("לעבודה", "navy", 0.5), ("ליומיום", "IMG_1786", 0.5), ("לספורט", "brown_biker", 0.5), ("ולבית", "LIBERTY5", 0.5)]), 2.4, rubber, 0.45),
     (split2("ZOE_NOIR-SF411_LG411_8small", "ZOE_TERRACOTTA-SF411_04small", ["מתאים לאורך כל ההיריון", "וגם אחריו"]), 2.4, whip(-1), 0.30),
     (strip([("IMG_2422", .5), ("light-grey", .5), ("IMG_1767", .5), ("legging1", .5), ("IMG_1604", .5), ("brown_straight", .5)],
            ["מגוון גזרות", "אורכים והדפסים"]), 1.9, rubber, 0.45),

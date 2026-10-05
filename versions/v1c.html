@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matching | ייעוץ לצמיחה עסקית ואוטומציות AI</title>
+<meta name="description" content="אני מאבחנת ומחברת את האתר, הפרסום, המדידה והאוטומציות כדי לחשוף מה עוצר את הצמיחה ולבנות מערכת עסקית שעובדת יחד.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF2F6;
+  --surface:#FFFFFF;
+  --surface-2:#F6F8FB;
+  --ink:#13132A;
+  --muted:#4A5068;
+  --line:#D3DAE4;
+  --line-strong:#B7C1CF;
+  --magenta:#D90459;
+  --magenta-ink:#B00348;
+  --magenta-soft:#FCE7EF;
+  --teal:#0E7468;
+  --teal-soft:#DDF1EE;
+  --unsure:#5B6478;
+  --unsure-soft:#E4E8EF;
+  --focus:#2D5BD7;
+  --radius:14px;
+  --radius-sm:9px;
+  --shadow:0 1px 2px rgba(19,19,42,.05),0 6px 24px rgba(19,19,42,.06);
+  --sans:"IBM Plex Sans Hebrew","Arial Hebrew",Arial,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --wrap:1160px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:17px;line-height:1.65;
+  overflow-wrap:break-word;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{line-height:1.25;margin:0;font-weight:700;letter-spacing:-.005em}
+p{margin:0}
+.mono{font-family:var(--mono);font-weight:500;letter-spacing:0}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:24px}
+@media (max-width:600px){.wrap{padding-inline:16px}}
+
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+
+.skip{
+  position:absolute;inset-inline-start:16px;inset-block-start:-100px;z-index:100;
+  background:var(--ink);color:#fff;padding:10px 16px;border-radius:var(--radius-sm);
+  text-decoration:none;font-weight:600;
+}
+.skip:focus{inset-block-start:12px}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:48px;padding:12px 22px;border-radius:999px;border:0;
+  font:inherit;font-weight:600;font-size:16px;text-decoration:none;cursor:pointer;
+  transition:background-color .15s ease,transform .15s ease;
+}
+.btn-primary{background:var(--magenta);color:#fff}
+.btn-primary:hover{background:var(--magenta-ink)}
+.btn-ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line-strong)}
+.btn-ghost:hover{background:var(--surface)}
+
+/* Header */
+.site-header{background:var(--surface);border-block-end:1px solid var(--line);position:sticky;top:0;z-index:20}
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px}
+.brand{display:flex;flex-direction:column;text-decoration:none;line-height:1.15}
+.brand-name{font-family:var(--mono);font-weight:500;font-size:21px;letter-spacing:-.01em}
+.brand-name b{color:var(--magenta);font-weight:500}
+.brand-tag{font-size:12.5px;color:var(--muted)}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0}
+.nav-links a{display:block;padding:8px 12px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:500;color:var(--ink)}
+.nav-links a:hover{background:var(--bg)}
+.nav-links a[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--ink);border-radius:0}
+.nav-cta{padding:10px 18px;min-height:42px;font-size:15px}
+.menu-btn{display:none;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border:1.5px solid var(--line-strong);background:var(--surface);border-radius:999px;font:inherit;font-size:15px;font-weight:600;color:var(--ink);cursor:pointer}
+.menu-btn .bars{width:18px;height:12px;position:relative;display:inline-block}
+.menu-btn .bars::before,.menu-btn .bars::after,.menu-btn .bars span{content:"";position:absolute;inset-inline:0;height:2px;background:currentColor;border-radius:2px}
+.menu-btn .bars::before{top:0}.menu-btn .bars span{top:5px}.menu-btn .bars::after{bottom:0}
+@media (max-width:980px){
+  .menu-btn{display:inline-flex}
+  .nav-cta{display:none}
+  .nav-panel{display:none;position:absolute;inset-inline:0;top:100%;background:var(--surface);border-block-end:1px solid var(--line);box-shadow:var(--shadow);padding:8px 16px 16px}
+  .nav-panel.open{display:block}
+  .nav-links{flex-direction:column;align-items:stretch}
+  .nav-links a{padding:12px;font-size:16px}
+}
+
+/* Hero */
+.hero{padding-block:56px 64px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:48px;align-items:start}
+.eyebrow{display:inline-block;font-size:14px;font-weight:600;color:var(--muted);margin-block-end:16px}
+.hero h1{font-size:clamp(32px,4.4vw,50px);font-weight:700;margin-block-end:20px}
+.hero h1 span{display:block}
+.hero-sub{font-size:19px;color:var(--muted);max-width:34em;margin-block-end:28px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-block-end:36px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0;padding:0;list-style:none}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 14px 12px}
+.stat .num{display:block;font-family:var(--mono);font-size:26px;font-weight:500;line-height:1.1;margin-block-end:4px}
+.stat .lbl{display:block;font-size:14px;color:var(--muted);line-height:1.4}
+.motto{margin-block-start:24px;font-weight:600;font-size:16px;color:var(--ink)}
+@media (max-width:980px){
+  /* v1b: on narrow screens the signal lab comes right after the hero actions; stats move below it */
+  .hero-grid{grid-template-columns:minmax(0,1fr);gap:0}
+  .hero-copy{display:contents}
+  .hero-copy>*{order:1}
+  .lab{order:2;margin-block-end:28px}
+  .stats{order:3}
+  .motto{order:4}
+  .hero-actions{margin-block-end:28px}
+}
+@media (max-width:600px){
+  .hero{padding-block:36px 48px}
+  .hero-sub{font-size:17px}
+  .stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .stat{padding:10px 8px;text-align:center}
+  .stat .num{font-size:20px;margin-block-end:2px}
+  .stat .lbl{font-size:12.5px}
+  .hero-actions .btn{flex:1 1 100%}
+}
+
+/* Signal lab (signature) */
+.lab{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+.lab-head{padding:20px 22px 16px;border-block-end:1px solid var(--line)}
+.lab-head h2{font-size:20px;margin-block-end:4px}
+.lab-head p{color:var(--muted);font-size:15.5px}
+.lab-flow{display:flex;flex-wrap:wrap;gap:6px 8px;margin:12px 0 0;padding:0;list-style:none;font-size:13.5px;color:var(--muted)}
+.lab-flow li{display:flex;align-items:center;gap:8px}
+.lab-flow li:not(:last-child)::after{content:"←";color:var(--line-strong)}
+.lab-flow b{color:var(--ink);font-weight:600}
+.lab-rows{padding:6px 0}
+.row{border:0;margin:0;padding:14px 22px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 16px;align-items:center;border-block-end:1px solid var(--line);min-width:0}
+.row:last-child{border-block-end:0}
+.row legend{float:left;grid-column:1;grid-row:1;width:100%;padding:0;display:flex;align-items:center;gap:10px;font-weight:600;font-size:17px}
+.row .row-meta{grid-column:1;grid-row:2;min-width:0}
+.row .tools{display:block;font-family:var(--mono);font-size:13px;color:var(--muted);margin-block-start:2px;overflow-wrap:anywhere;unicode-bidi:plaintext;text-align:start}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--line-strong);flex:none;transition:background-color .2s}
+.row[data-state="ok"] .dot{background:var(--teal)}
+.row[data-state="unsure"] .dot{background:var(--unsure)}
+.row[data-state="broken"] .dot{background:var(--magenta)}
+.seg{display:inline-flex;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;grid-column:2;grid-row:1/span 2}
+.seg input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.seg label{display:block;padding:7px 13px;border-radius:999px;font-size:14px;font-weight:500;cursor:pointer;color:var(--muted);white-space:nowrap;min-height:34px;line-height:20px}
+.seg label:hover{color:var(--ink);background:#fff}
+.seg input:focus-visible + label{outline:3px solid var(--focus);outline-offset:1px}
+.seg input[value="ok"]:checked + label{background:var(--teal);color:#fff}
+.seg input[value="unsure"]:checked + label{background:var(--unsure);color:#fff}
+.seg input[value="broken"]:checked + label{background:var(--magenta);color:#fff}
+@media (max-width:520px){
+  .row{grid-template-columns:minmax(0,1fr);padding:14px 16px}
+  .seg{grid-column:1;grid-row:3;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}
+  .seg label{text-align:center;padding:7px 4px}
+  .lab-head{padding:18px 16px 14px}
+}
+.readout{background:var(--surface-2);border-block-start:1px solid var(--line);padding:18px 22px 20px}
+.meter{display:flex;gap:6px;margin-block-end:12px}
+.meter span{flex:1;height:6px;border-radius:3px;background:var(--line);transition:background-color .2s}
+.meter span[data-s="ok"]{background:var(--teal)}
+.meter span[data-s="unsure"]{background:var(--unsure)}
+.meter span[data-s="broken"]{background:var(--magenta)}
+.readout-count{font-size:15px;color:var(--muted);margin-block-end:4px}
+.readout-count .mono{color:var(--ink);font-size:17px}
+.readout-rec{font-size:18px;font-weight:600;margin-block-end:14px}
+.readout-rec strong{color:var(--ink);box-shadow:inset 0 -.38em 0 var(--teal-soft)}
+.readout.has-broken .readout-rec strong{box-shadow:inset 0 -.38em 0 var(--magenta-soft)}
+.readout-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.reset{background:none;border:0;font:inherit;font-size:14.5px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:8px 4px;min-height:40px}
+.reset:hover{color:var(--ink)}
+@media (max-width:520px){.readout{padding:16px}.readout-actions .btn{flex:1 1 100%}}
+
+/* Sections */
+section{scroll-margin-top:84px}
+.section{padding-block:80px}
+.section-alt{background:var(--surface);border-block:1px solid var(--line)}
+.section-head{max-width:720px;margin-block-end:40px}
+.section-head h2{font-size:clamp(26px,3.2vw,36px);margin-block-end:14px}
+.section-head p{color:var(--muted);font-size:18px}
+.kicker{display:block;font-size:14px;font-weight:600;color:var(--muted);margin-block-end:10px}
+@media (max-width:600px){.section{padding-block:56px}.section-head{margin-block-end:28px}.section-head p{font-size:17px}}
+
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;list-style:none;margin:0;padding:0}
+@media (max-width:900px){.cards{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px}
+.section-alt .card{background:var(--bg);border-color:transparent}
+.card h3{font-size:20px;margin-block-end:10px}
+.card p{color:var(--muted)}
+.card .idx{font-family:var(--mono);font-size:14px;color:var(--muted);display:block;margin-block-end:14px}
+.card .lead{color:var(--ink);font-weight:500;margin-block-end:6px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:18px 0 0;padding:0}
+.tags li{font-size:13.5px;padding:4px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--ink)}
+
+/* Method */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;counter-reset:s}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 18px}
+.step .n{font-family:var(--mono);font-size:28px;line-height:1;display:block;margin-block-end:14px;color:var(--ink)}
+.step h3{font-size:18px;margin-block-end:6px}
+.step p{font-size:15px;color:var(--muted);line-height:1.55}
+@media (max-width:980px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){
+  .steps{grid-template-columns:minmax(0,1fr)}
+  .step{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;align-items:baseline}
+  .step .n{grid-row:span 2;margin:0;font-size:24px}
+}
+
+/* Proof */
+.proof{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:center}
+.proof h2{font-size:clamp(26px,3.2vw,36px);margin-block-end:14px}
+.proof p{color:var(--muted);font-size:18px}
+.proof-panel{background:var(--bg);border-radius:var(--radius);padding:24px;display:grid;gap:10px}
+.proof-panel div{display:flex;align-items:center;gap:12px;background:var(--surface);border-radius:var(--radius-sm);padding:12px 16px;font-weight:500}
+.proof-panel .mono{font-size:13px;color:var(--muted)}
+@media (max-width:900px){.proof{grid-template-columns:minmax(0,1fr);gap:28px}.proof p{font-size:17px}}
+
+/* About */
+.about{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:48px;align-items:center}
+.about-photo{aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;background:#C9D3DF}
+.about-photo img{width:100%;height:100%;object-fit:cover}
+.about h2{font-size:clamp(26px,3.2vw,36px);margin-block-end:6px}
+.about .name{font-weight:600;color:var(--muted);margin-block-end:16px}
+.about p.body{font-size:18px;margin-block-end:22px}
+.text-link{font-weight:600;text-underline-offset:4px;text-decoration-thickness:1.5px}
+.text-link:hover{color:var(--magenta-ink)}
+@media (max-width:820px){.about{grid-template-columns:minmax(0,1fr);gap:28px}.about-photo{max-width:280px;aspect-ratio:1/1}.about p.body{font-size:17px}}
+
+/* Contact */
+.contact{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px;align-items:start}
+.contact h2{font-size:clamp(26px,3.2vw,36px);margin-block-end:14px}
+.contact-intro p{color:var(--muted);font-size:18px;margin-block-end:26px}
+[hidden]{display:none!important}
+.me{display:flex;align-items:center;gap:14px;margin-block-end:22px}
+.me img{width:64px;height:64px;border-radius:50%;object-fit:cover;background:#C9D3DF;flex:none}
+.me .me-name{display:block;font-weight:700;font-size:17px;color:var(--ink)}
+.contact-intro .me .me-line{display:block;margin:0;font-size:15px;color:var(--muted)}
+.direct{display:grid;gap:10px;list-style:none;margin:0;padding:0}
+.direct a{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 18px;text-decoration:none;font-weight:600}
+.direct a:hover{border-color:var(--line-strong)}
+.direct .sub{font-weight:400;color:var(--muted);font-size:15px}
+.form{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:var(--shadow)}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field.full{grid-column:1/-1}
+.field label{font-weight:600;font-size:15px}
+.req{color:var(--magenta-ink)}
+.field input,.field textarea{
+  width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--surface-2);
+  border:1.5px solid var(--line);border-radius:var(--radius-sm);padding:11px 14px;min-height:48px;
+}
+.field textarea{min-height:120px;resize:vertical;line-height:1.55}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--focus);box-shadow:0 0 0 3px rgba(45,91,215,.2);background:#fff}
+.field input[dir="ltr"]{text-align:end}
+.field input[dir="ltr"]::placeholder{text-align:end}
+.consent{display:flex;gap:10px;align-items:flex-start;margin-block:20px;font-size:15px;color:var(--muted)}
+.consent input{width:20px;height:20px;margin:3px 0 0;flex:none;accent-color:var(--magenta)}
+.consent a{color:var(--ink);font-weight:500}
+.prefill-note{font-size:13.5px;color:var(--teal);font-weight:500;min-height:0}
+.thanks{display:none;margin-block-start:16px;padding:14px 18px;border-radius:var(--radius-sm);background:var(--teal-soft);color:#0B4F47;font-weight:600}
+.thanks.show{display:block}
+@media (max-width:900px){.contact{grid-template-columns:minmax(0,1fr);gap:32px}}
+@media (max-width:600px){.fields{grid-template-columns:minmax(0,1fr)}.form{padding:20px 16px}.form .btn{width:100%}.contact-intro p{font-size:17px}}
+
+/* Footer */
+.site-footer{background:var(--ink);color:#DCE1EA;padding-block:44px 28px;font-size:15px}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:flex-start}
+.foot .brand-name{color:#fff}
+.foot .brand-name b{color:#FF6FA3}
+.foot p{margin-block-start:6px;color:#B9C1CF}
+.foot ul{display:flex;flex-wrap:wrap;gap:6px 18px;list-style:none;margin:0;padding:0}
+.foot a{color:#DCE1EA;text-underline-offset:3px}
+.foot a:hover{color:#fff}
+.site-footer :focus-visible{outline-color:#8FB0FF}
+.foot-motto{margin-block-start:28px;padding-block-start:18px;border-block-start:1px solid rgba(255,255,255,.12);color:#B9C1CF;font-size:14px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">דלגו לתוכן</a>
+
+<header class="site-header">
+  <div class="wrap nav-bar">
+    <a class="brand" href="https://matching.co.il/" aria-label="Matching – דף הבית">
+      <span class="brand-name" dir="ltr">Match<b>ing</b></span>
+      <span class="brand-tag">ייעוץ לצמיחה עסקית ואוטומציות AI</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-panel">
+      <span class="bars" aria-hidden="true"><span></span></span>
+      תפריט
+    </button>
+    <nav class="nav-panel" id="nav-panel" aria-label="ניווט ראשי">
+      <ul class="nav-links">
+        <li><a href="https://matching.co.il/" aria-current="page">בית</a></li>
+        <li><a href="https://matching.co.il/שירותים/">מה אני עושה</a></li>
+        <li><a href="#method">איך זה עובד</a></li>
+        <li><a href="https://matching.co.il/blog/">חדשות מטא ו־AI</a></li>
+        <li><a href="https://matching.co.il/אודות/">אודות</a></li>
+        <li><a href="#contact">צור קשר</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-cta" href="#contact">לקביעת שיחת אבחון</a>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <!-- HERO: headline + signal lab -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">ייעוץ לצמיחה עסקית ואוטומציות AI</span>
+        <h1 id="hero-title"><span>יותר מכירות.</span> <span>פחות עבודה ידנית.</span> <span>מערכת אחת שעובדת נכון.</span></h1>
+        <p class="hero-sub">אני מאבחנת ומחברת את האתר, הפרסום, המדידה והאוטומציות כדי לחשוף מה עוצר את הצמיחה ולבנות מערכת עסקית שעובדת יחד.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">לקביעת שיחת אבחון</a>
+          <a class="btn btn-ghost" href="#method">איך זה עובד</a>
+        </div>
+        <ul class="stats" aria-label="במספרים">
+          <li class="stat"><span class="num" dir="ltr">10+</span><span class="lbl">שנות ניסיון</span></li>
+          <li class="stat"><span class="num" dir="ltr">120+</span><span class="lbl">עסקים</span></li>
+          <li class="stat"><span class="num">כ־<span dir="ltr">40%</span></span><span class="lbl">עלייה במכירות (בתהליך שנמדד)</span></li>
+        </ul>
+        <p class="motto">מאתרים. מחברים. צומחים.</p>
+      </div>
+
+      <div class="lab" id="signal-lab">
+        <div class="lab-head">
+          <h2 id="lab-title">מעבדת האותות</h2>
+          <p>מגלים מדוע התנועה לא הופכת למכירות. סמנו את מצב כל ערוץ אצלכם:</p>
+          <ol class="lab-flow" aria-label="איך זה קורה">
+            <li><span><b>תנועה מגיעה</b> · פרסום, חיפוש ומסחר</span></li>
+            <li><span><b>הכשל מתגלה</b> · חיכוך באתר ומדידה חלקית</span></li>
+            <li><span><b>המערכת מתחברת</b> · רכישה וצמיחה</span></li>
+          </ol>
+        </div>
+
+        <form class="lab-rows" id="lab-form" aria-labelledby="lab-title" onsubmit="return false">
+          <fieldset class="row" data-key="ads" data-state="">
+            <legend><span class="dot" aria-hidden="true"></span>פרסום</legend>
+            <div class="row-meta"><span class="tools" dir="ltr">Meta Ads · Google Ads</span></div>
+            <div class="seg">
+              <input type="radio" id="ads-ok" name="ads" value="ok"><label for="ads-ok">עובד</label>
+              <input type="radio" id="ads-unsure" name="ads" value="unsure"><label for="ads-unsure">לא בטוח</label>
+              <input type="radio" id="ads-broken" name="ads" value="broken"><label for="ads-broken">שבור</label>
+            </div>
+          </fieldset>
+          <fieldset class="row" data-key="vis" data-state="">
+            <legend><span class="dot" aria-hidden="true"></span>נראות</legend>
+            <div class="row-meta"><span class="tools" dir="ltr">SEO · GEO · Search Console · Google Business</span></div>
+            <div class="seg">
+              <input type="radio" id="vis-ok" name="vis" value="ok"><label for="vis-ok">עובד</label>
+              <input type="radio" id="vis-unsure" name="vis" value="unsure"><label for="vis-unsure">לא בטוח</label>
+              <input type="radio" id="vis-broken" name="vis" value="broken"><label for="vis-broken">שבור</label>
+            </div>
+          </fieldset>
+          <fieldset class="row" data-key="measure" data-state="">
+            <legend><span class="dot" aria-hidden="true"></span>מדידה</legend>
+            <div class="row-meta"><span class="tools" dir="ltr">GA4 · GTM · Pixel · Conversion API</span></div>
+            <div class="seg">
+              <input type="radio" id="measure-ok" name="measure" value="ok"><label for="measure-ok">עובד</label>
+              <input type="radio" id="measure-unsure" name="measure" value="unsure"><label for="measure-unsure">לא בטוח</label>
+              <input type="radio" id="measure-broken" name="measure" value="broken"><label for="measure-broken">שבור</label>
+            </div>
+          </fieldset>
+          <fieldset class="row" data-key="commerce" data-state="">
+            <legend><span class="dot" aria-hidden="true"></span>מסחר</legend>
+            <div class="row-meta"><span class="tools"><span dir="ltr">Merchant Center</span> · קטלוגים · סל וקופה</span></div>
+            <div class="seg">
+              <input type="radio" id="commerce-ok" name="commerce" value="ok"><label for="commerce-ok">עובד</label>
+              <input type="radio" id="commerce-unsure" name="commerce" value="unsure"><label for="commerce-unsure">לא בטוח</label>
+              <input type="radio" id="commerce-broken" name="commerce" value="broken"><label for="commerce-broken">שבור</label>
+            </div>
+          </fieldset>
+          <fieldset class="row" data-key="process" data-state="">
+            <legend><span class="dot" aria-hidden="true"></span>תהליכים</legend>
+            <div class="row-meta"><span class="tools"><span dir="ltr">CRM</span> · דיוור · <span dir="ltr">WhatsApp · Bot · AI</span></span></div>
+            <div class="seg">
+              <input type="radio" id="process-ok" name="process" value="ok"><label for="process-ok">עובד</label>
+              <input type="radio" id="process-unsure" name="process" value="unsure"><label for="process-unsure">לא בטוח</label>
+              <input type="radio" id="process-broken" name="process" value="broken"><label for="process-broken">שבור</label>
+            </div>
+          </fieldset>
+        </form>
+
+        <div class="readout" id="readout">
+          <div class="meter" aria-hidden="true">
+            <span data-k="ads"></span><span data-k="vis"></span><span data-k="measure"></span><span data-k="commerce"></span><span data-k="process"></span>
+          </div>
+          <div aria-live="polite" aria-atomic="true">
+            <p class="readout-count" id="readout-count">עדיין לא סומן אף ערוץ.</p>
+            <p class="readout-rec" id="readout-rec">סמנו לפחות ערוץ אחד ונראה איפה כדאי להתחיל.</p>
+          </div>
+          <div class="readout-actions">
+            <button class="btn btn-primary" type="button" id="lab-cta">קבעו שיחת אבחון על זה</button>
+            <a class="btn btn-ghost" id="lab-wa" href="https://wa.me/972544421161" target="_blank" rel="noopener" hidden>שלחו את התוצאות ב־<span dir="ltr">WhatsApp</span></a>
+            <button class="reset" type="button" id="lab-reset">איפוס</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="section section-alt" aria-labelledby="problem-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="problem-title">לא תמיד צריך יותר תנועה. צריך מערכת שמנצלת אותה נכון.</h2>
+        <p>אם הקמפיינים מביאים לקוחות אבל המכירות לא גדלות בהתאם, הבעיה יכולה להיות באתר, במדידה או בתהליך שמגיע אחרי הקליק.</p>
+      </div>
+      <ul class="cards">
+        <li class="card">
+          <span class="idx" dir="ltr">01</span>
+          <h3>אתר וחוויית רכישה</h3>
+          <p class="lead">הלקוח מגיע, אבל מתקשה להשלים רכישה.</p>
+          <p>מסע לא ברור, חיכוך בעמודי המוצר, סל מסורבל או קופה שלא בנויה למובייל.</p>
+        </li>
+        <li class="card">
+          <span class="idx" dir="ltr">02</span>
+          <h3>נתונים וממשקים</h3>
+          <p class="lead">המערכות מדווחות תמונה חלקית.</p>
+          <p>חיבורים חסרים בין האתר, <span dir="ltr">Analytics</span>, <span dir="ltr">Meta</span>, <span dir="ltr">Google Ads</span> ו־<span dir="ltr">Merchant Center</span>.</p>
+        </li>
+        <li class="card">
+          <span class="idx" dir="ltr">03</span>
+          <h3>שירות ותהליכים</h3>
+          <p class="lead">לידים ולקוחות נופלים בין הכיסאות.</p>
+          <p>דיוור, <span dir="ltr">WhatsApp</span> ושירות לקוחות עובדים בנפרד במקום להמשיך את מסע הלקוח.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" aria-labelledby="services-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="services-title">שלושה תחומים. מערכת צמיחה אחת.</h2>
+        <p>המיקוד המרכזי הוא באתרי איקומרס, והשיטה מתאימה גם לעסקים קטנים ובינוניים ולארגונים גדולים שרוצים לחבר בין השיווק, האתר, הנתונים והעבודה היומיומית.</p>
+      </div>
+      <ul class="cards">
+        <li class="card">
+          <h3>אבחון אתר ומערך המכירות</h3>
+          <p>בדיקה עסקית, טכנית ו־<span dir="ltr">UX/UI</span> שמזהה מה מונע מהתנועה הקיימת להפוך להכנסות.</p>
+          <ul class="tags" aria-label="כולל">
+            <li>מסע לקוח והמרות</li><li>סל וקופה</li><li>ביצועים וחיבורי מדידה</li>
+          </ul>
+        </li>
+        <li class="card">
+          <h3>פיתוח עסקי באמצעות <span dir="ltr">AI</span></h3>
+          <p>הפיכת ידע, משימות ומידע לתהליכים חכמים שמקצרים עבודה ומאפשרים לצמוח בלי להעמיס כוח אדם.</p>
+          <ul class="tags" aria-label="כולל">
+            <li>מיפוי הזדמנויות</li><li>סוכני <span dir="ltr">AI</span> וכלי עבודה</li><li>בקרה והטמעה</li>
+          </ul>
+        </li>
+        <li class="card">
+          <h3>אוטומציות ושיפור תהליכים</h3>
+          <p>חיבור בין פרסום, דיוור, <span dir="ltr">WhatsApp</span>, שירות ומערכות פנים ארגוניות לתהליך אחד מדיד.</p>
+          <ul class="tags" aria-label="כולל">
+            <li>לידים ולקוחות</li><li>שירות ושימור</li><li>תהליכים שיווקיים ופנימיים</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- METHOD -->
+  <section class="section section-alt" id="method" aria-labelledby="method-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">איך זה עובד</span>
+        <h2 id="method-title">רואים את כל התמונה. מתקנים לפי סדר ההשפעה.</h2>
+        <p>במקום להתחיל מכלי חדש, מתחילים מהשאלה העסקית: איפה כסף, זמן או לקוחות הולכים לאיבוד?</p>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="n" aria-hidden="true">1</span><h3>אבחון</h3><p>נתונים, אתר, קמפיינים ותהליכי עבודה</p></li>
+        <li class="step"><span class="n" aria-hidden="true">2</span><h3>תיעדוף</h3><p>מה ישפיע עכשיו על המכירות והיעילות</p></li>
+        <li class="step"><span class="n" aria-hidden="true">3</span><h3>חיבור</h3><p>ממשקים, מערכות ואחריות בין צוותים</p></li>
+        <li class="step"><span class="n" aria-hidden="true">4</span><h3>אוטומציה</h3><p>פחות עבודה ידנית, יותר עקביות ובקרה</p></li>
+        <li class="step"><span class="n" aria-hidden="true">5</span><h3>מדידה</h3><p>בדיקה רציפה של התוצאות ושיפור</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section class="section" aria-labelledby="proof-title">
+    <div class="wrap proof">
+      <div>
+        <h2 id="proof-title">החלטות עסקיות צריכות להישען על הוכחות.</h2>
+        <p>לכן אני בוחנת את נתוני המכירות, איכות המדידה והתהליך בפועל, ומתרגמת אותם לסדר פעולות ברור שאפשר למדוד ולשפר.</p>
+      </div>
+      <div class="proof-panel" aria-hidden="true">
+        <div><span class="dot" style="background:var(--ink)"></span>נתוני המכירות</div>
+        <div><span class="dot" style="background:var(--ink)"></span>איכות המדידה</div>
+        <div><span class="dot" style="background:var(--ink)"></span>התהליך בפועל</div>
+        <div style="background:var(--ink);color:#fff"><span class="dot" style="background:#fff"></span>סדר פעולות ברור שאפשר למדוד ולשפר</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section section-alt" aria-labelledby="about-title">
+    <div class="wrap about">
+      <div class="about-photo">
+        <img src="https://matching.co.il/wp-content/uploads/2026/03/WhatsApp-Image-2026-03-25-at-11.50.41-PM.jpeg" alt="קרן הראל" width="640" height="800" loading="lazy">
+      </div>
+      <div>
+        <h2 id="about-title">לראות את העסק כמערכת אחת.</h2>
+        <p class="name">קרן הראל</p>
+        <p class="body">אני מחברת בין נקודת המבט העסקית, חוויית המשתמש, מערכות הפרסום, הנתונים והאוטומציות. עם יותר מעשר שנות ניסיון וליווי של יותר מ־120 עסקים, אני נכנסת לעומק המערכת כדי לזהות את החסם האמיתי, לבנות סדר עדיפויות ולוודא שהכלים עובדים עבור העסק, ולא להפך.</p>
+        <a class="text-link" href="https://matching.co.il/אודות/">להכיר אותי לעומק ←</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact" aria-labelledby="contact-title">
+    <div class="wrap contact">
+      <div class="contact-intro">
+        <div class="me">
+          <img src="https://matching.co.il/wp-content/uploads/2026/03/WhatsApp-Image-2026-03-25-at-11.50.41-PM.jpeg" alt="" width="64" height="64" loading="lazy">
+          <div><span class="me-name">קרן הראל</span><span class="me-line">כותבים ישירות אליי</span></div>
+        </div>
+        <h2 id="contact-title">בואו נגלה מה באמת עוצר את הצמיחה.</h2>
+        <p>שיחת האבחון הראשונית נועדה להבין את התמונה ולבחור את המקום הראשון שכדאי לטפל בו.</p>
+        <ul class="direct">
+          <li><a href="tel:0544421161"><span>טלפון</span><span class="sub"><bdi dir="ltr">054-4421161</bdi></span></a></li>
+          <li><a href="https://wa.me/972544421161" target="_blank" rel="noopener"><span><span dir="ltr">WhatsApp</span></span><span class="sub">שליחת הודעה</span></a></li>
+        </ul>
+      </div>
+
+      <form class="form" id="contact-form" novalidate>
+        <div class="fields">
+          <div class="field">
+            <label for="f-company">חברה</label>
+            <input id="f-company" name="company" type="text" autocomplete="organization">
+          </div>
+          <div class="field">
+            <label for="f-name">שם מלא <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-phone">טלפון <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-phone" name="phone" type="tel" dir="ltr" autocomplete="tel" inputmode="tel" required>
+          </div>
+          <div class="field">
+            <label for="f-site">כתובת האתר</label>
+            <input id="f-site" name="site" type="url" dir="ltr" autocomplete="url" placeholder="https://">
+          </div>
+          <div class="field full">
+            <label for="f-challenge">מה האתגר המרכזי כרגע?</label>
+            <textarea id="f-challenge" name="challenge" aria-describedby="prefill-note"></textarea>
+            <span class="prefill-note" id="prefill-note"></span>
+          </div>
+        </div>
+        <div class="consent">
+          <input id="f-consent" name="consent" type="checkbox" required>
+          <label for="f-consent">קראתי את <a href="https://matching.co.il/privacy-policy/">מדיניות הפרטיות</a> ואני מסכים/ה להעברת הפרטים לצורך יצירת קשר. <span class="req" aria-hidden="true">*</span></label>
+        </div>
+        <button class="btn btn-primary" type="submit">שלחו לי את הפרטים</button>
+        <p class="thanks" id="thanks" role="status" tabindex="-1"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <span class="brand-name" dir="ltr">Match<b>ing</b></span>
+        <p>ייעוץ לצמיחה עסקית באמצעות נתונים, <span dir="ltr">AI</span> ואוטומציות</p>
+      </div>
+      <nav aria-label="קישורים בתחתית">
+        <ul>
+          <li><a href="https://matching.co.il/blog/">תובנות</a></li>
+          <li><a href="https://matching.co.il/privacy-policy/">מדיניות פרטיות</a></li>
+          <li><a href="https://matching.co.il/cookie-policy/">מדיניות קוקיז</a></li>
+          <li><a href="https://matching.co.il/terms/">תנאי שימוש</a></li>
+          <li><a href="https://matching.co.il/accessibility/">נגישות</a></li>
+        </ul>
+      </nav>
+    </div>
+    <p class="foot-motto">מאתרים. מחברים. צומחים.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Mobile menu
+  var menuBtn=document.querySelector('.menu-btn');
+  var panel=document.getElementById('nav-panel');
+  function closeMenu(){panel.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');}
+  menuBtn.addEventListener('click',function(){
+    var open=menuBtn.getAttribute('aria-expanded')==='true';
+    if(open){closeMenu();}else{panel.classList.add('open');menuBtn.setAttribute('aria-expanded','true');}
+  });
+  panel.addEventListener('click',function(e){if(e.target.closest('a'))closeMenu();});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&menuBtn.getAttribute('aria-expanded')==='true'){closeMenu();menuBtn.focus();}
+  });
+
+  // Signal lab
+  var CH=[
+    {k:'ads',name:'פרסום'},
+    {k:'vis',name:'נראות'},
+    {k:'measure',name:'מדידה'},
+    {k:'commerce',name:'מסחר'},
+    {k:'process',name:'תהליכים'}
+  ];
+  var LBL={ok:'עובד',unsure:'לא בטוח',broken:'שבור'};
+  var labForm=document.getElementById('lab-form');
+  var readout=document.getElementById('readout');
+  var countEl=document.getElementById('readout-count');
+  var recEl=document.getElementById('readout-rec');
+  var lastSummary='';
+  var WA='https://wa.me/972544421161';
+  var waLink=document.getElementById('lab-wa');
+
+  function state(){
+    var s={};
+    CH.forEach(function(c){
+      var el=labForm.querySelector('input[name="'+c.k+'"]:checked');
+      s[c.k]=el?el.value:'';
+    });
+    return s;
+  }
+  function recommend(s){
+    if(s.measure==='broken')return 'אבחון מדידה';
+    if(s.commerce==='broken'||s.ads==='broken'||s.vis==='broken')return 'אבחון אתר ומערך המכירות';
+    if(s.process==='broken')return 'אוטומציות ושיפור תהליכים';
+    return null;
+  }
+  function update(){
+    var s=state(),broken=[],unsure=[],ok=[],marked=0;
+    CH.forEach(function(c){
+      var v=s[c.k];
+      var row=labForm.querySelector('.row[data-key="'+c.k+'"]');
+      row.setAttribute('data-state',v);
+      var bar=readout.querySelector('.meter span[data-k="'+c.k+'"]');
+      if(v)bar.setAttribute('data-s',v);else bar.removeAttribute('data-s');
+      if(v){marked++;}
+      if(v==='broken')broken.push(c.name);
+      else if(v==='unsure')unsure.push(c.name);
+      else if(v==='ok')ok.push(c.name);
+    });
+    readout.classList.toggle('has-broken',broken.length>0);
+    if(!marked){
+      countEl.textContent='עדיין לא סומן אף ערוץ.';
+      recEl.textContent='סמנו לפחות ערוץ אחד ונראה איפה כדאי להתחיל.';
+      lastSummary='';
+      waLink.hidden=true;
+      waLink.href=WA;
+      return;
+    }
+    var leaking=broken.length+unsure.length;
+    countEl.innerHTML='';
+    var n=document.createElement('span');n.className='mono';n.textContent=leaking+'/5';
+    countEl.appendChild(n);
+    var t=' אותות דולפים';
+    if(broken.length&&unsure.length)t+=' ('+(broken.length===1?'אחד שבור':broken.length+' שבורים')+', '+(unsure.length===1?'אחד לא בטוח':unsure.length+' לא בטוחים')+')';
+    else if(broken.length)t+=' ('+(broken.length===1?'אחד שבור':broken.length+' שבורים')+')';
+    else if(unsure.length)t+=' ('+(unsure.length===1?'אחד לא בטוח':unsure.length+' לא בטוחים')+')';
+    if(marked<5)t+=' · סומנו '+marked+' מתוך 5';
+    countEl.appendChild(document.createTextNode(t));
+
+    var rec=recommend(s);
+    recEl.innerHTML='';
+    var strong=document.createElement('strong');
+    if(rec){
+      recEl.appendChild(document.createTextNode('איפה להתחיל: '));
+      strong.textContent=rec;
+      recEl.appendChild(strong);
+    }else{
+      strong.textContent='בואו נאמת את זה עם נתונים';
+      recEl.appendChild(strong);
+      recEl.appendChild(document.createTextNode(unsure.length?' – יש ערוצים שלא ברור אם הם עובדים.':' – גם כשהכול נראה תקין, הנתונים מספרים את הסיפור.'));
+    }
+
+    var lines=['בדקתי את מעבדת האותות:'];
+    if(broken.length)lines.push('שבור: '+broken.join(', '));
+    if(unsure.length)lines.push('לא בטוח: '+unsure.join(', '));
+    if(ok.length)lines.push('עובד: '+ok.join(', '));
+    lines.push('המלצה: '+(rec?'להתחיל מ'+rec:'לאמת את זה עם נתונים'));
+    lastSummary=lines.join('\n');
+    waLink.href=WA+'?text='+encodeURIComponent('היי קרן, '+lastSummary);
+    waLink.hidden=false;
+  }
+  labForm.addEventListener('change',update);
+
+  document.getElementById('lab-reset').addEventListener('click',function(){
+    labForm.querySelectorAll('input[type="radio"]').forEach(function(r){r.checked=false;});
+    update();
+  });
+
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var challenge=document.getElementById('f-challenge');
+  var note=document.getElementById('prefill-note');
+  document.getElementById('lab-cta').addEventListener('click',function(){
+    if(lastSummary){
+      challenge.value=lastSummary;
+      note.textContent='תוצאות מעבדת האותות הועתקו לכאן. אפשר לערוך.';
+    }
+    var target=document.getElementById('contact');
+    target.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+    setTimeout(function(){document.getElementById('f-name').focus({preventScroll:true});},reduce?0:450);
+  });
+
+  // Contact form (prototype only: nothing is sent)
+  var form=document.getElementById('contact-form');
+  var thanks=document.getElementById('thanks');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!form.checkValidity()){form.reportValidity();return;}
+    var name=document.getElementById('f-name').value.trim();
+    thanks.textContent='תודה'+(name?' '+name:'')+'! הפרטים התקבלו, ואחזור אליך בהקדם לתיאום שיחת האבחון.';
+    thanks.classList.add('show');
+    form.querySelector('button[type="submit"]').disabled=true;
+    thanks.focus();
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matching — חמש גרסאות לעמוד הבית</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#13132A; --mag:#D90459; --bg:#E9ECF1; --card:#fff; --muted:#5B5E73; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:Heebo, "Arial Hebrew", Arial, system-ui, sans-serif; }
+  header { padding:32px 16px 8px; max-width:1500px; margin:0 auto; }
+  h1 { margin:0 0 6px; font-size:clamp(1.5rem, 3vw, 2.2rem); font-weight:800; }
+  header p { margin:0; color:var(--muted); }
+  main { display:grid; gap:20px; grid-template-columns:repeat(auto-fill, minmax(min(100%, 420px), 1fr)); padding:20px 16px 48px; max-width:1500px; margin:0 auto; }
+  .card { background:var(--card); border-radius:14px; overflow:hidden; box-shadow:0 1px 3px rgba(19,19,42,.08); display:flex; flex-direction:column; border:2px solid transparent; }
+  .card.pick { border-color:var(--mag); }
+  .frame { position:relative; aspect-ratio:16/11; overflow:hidden; background:#dfe3ea; }
+  /* Preview is rendered at desktop width (1280px) and scaled down to fit the card. */
+  .frame iframe { position:absolute; inset-block-start:0; inset-inline-start:0; width:1280px; height:880px; border:0; transform-origin:top right; pointer-events:none; }
+  .meta { padding:16px 18px 18px; display:flex; flex-direction:column; gap:6px; flex:1; }
+  .meta h2 { margin:0; font-size:1.15rem; display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .num { font-variant-numeric:tabular-nums; color:var(--muted); font-weight:600; }
+  .badge { background:var(--mag); color:#fff; font-size:.78rem; padding:2px 10px; border-radius:99px; font-weight:600; }
+  .meta p { margin:0; color:var(--muted); line-height:1.5; }
+  .meta a { margin-block-start:auto; align-self:flex-start; color:var(--mag); font-weight:600; text-decoration:none; padding-block-start:8px; }
+  .meta a:hover, .meta a:focus-visible { text-decoration:underline; }
+  a:focus-visible { outline:3px solid var(--mag); outline-offset:3px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Matching — חמש גרסאות לעמוד הבית</h1>
+  <p>כל כרטיס הוא עמוד מלא ועובד עם התוכן האמיתי מ־matching.co.il. לחיצה פותחת בגודל מלא. הבחירה שלי מסומנת במסגרת ורודה, והנימוקים בקובץ PICK.md.</p>
+</header>
+<main id="cards"></main>
+<script>
+  const versions = [
+    { n: 1, file: 'v1.html', name: 'מעבדת האותות', concept: 'כלי אבחון אינטראקטיבי הוא ההירו: המבקר מסמן אילו ערוצים עובדים ומקבל המלצה מאיפה להתחיל.' },
+    { n: 2, file: 'v2.html', name: 'פוסטר', concept: 'מסך אחד, מסר אחד, טיפוגרפיה ענקית בשני צבעים: מגנטה וכחול לילה.' },
+    { n: 3, file: 'v3.html', name: 'המסע', concept: 'ציר זמן אנכי של מסע הלקוח; קו האות "השבור" מתמלא בגלילה עד לטופס.' },
+    { n: 4, file: 'v4.html', name: 'לוח בקרה', concept: 'העסק כלוח בקרה: פאנלים צפופים, טבלת סטטוס ערוצים והדמיית חיבור המערכת.' },
+    { n: 5, file: 'v5.html', name: 'קרן, באופן אישי', concept: 'האדם קודם: תמונה גדולה, מכתב אישי וחתימה בכתב יד, אוויר ורווחים.' },
+  ];
+  const PICK = 0; // set to the picked version number
+  const main = document.getElementById('cards');
+  for (const v of versions) {
+    const card = document.createElement('article');
+    card.className = 'card' + (v.n === PICK ? ' pick' : '');
+    card.innerHTML = `
+      <div class="frame"><iframe src="${v.file}" title="תצוגה מקדימה של גרסה ${v.n}" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+      <div class="meta">
+        <h2><span class="num">${v.n}</span> ${v.name} ${v.n === PICK ? '<span class="badge">הבחירה שלי</span>' : ''}</h2>
+        <p>${v.concept}</p>
+        <a href="${v.file}" target="_blank" rel="noopener">לפתוח בגודל מלא ←</a>
+      </div>`;
+    main.appendChild(card);
+  }
+  function scaleFrames() {
+    document.querySelectorAll('.frame').forEach(f => {
+      f.querySelector('iframe').style.transform = `scale(${f.clientWidth / 1280})`;
+    });
+  }
+  addEventListener('resize', scaleFrames);
+  scaleFrames();
+</script>
+</body>
+</html>

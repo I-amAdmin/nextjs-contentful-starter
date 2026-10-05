@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matching | ייעוץ לצמיחה עסקית ואוטומציות AI</title>
+<meta name="description" content="אני מאבחנת ומחברת את האתר, הפרסום, המדידה והאוטומציות כדי לחשוף מה עוצר את הצמיחה ולבנות מערכת עסקית שעובדת יחד.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&family=Varela+Round&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FCEFF3;
+  --bg-deep:#F7E1E9;
+  --surface:#FFFFFF;
+  --ink:#13132A;
+  --ink-soft:#45425C;
+  --muted:#5E5873;
+  --magenta:#D90459;
+  --magenta-dark:#A8033F;
+  --line-off:#A99BA6;
+  --border:#EBCFDA;
+  --focus:#13132A;
+  --radius:18px;
+  --head:"Varela Round","Arial Hebrew",Arial,system-ui,sans-serif;
+  --body:"Rubik","Arial Hebrew",Arial,system-ui,sans-serif;
+  /* timeline geometry */
+  --gut:76px;      /* space reserved at inline-start for the line */
+  --lx:26px;       /* line position from inline-start of the journey */
+  --node:22px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--body);font-size:1.0625rem;line-height:1.7;
+  overflow-wrap:break-word;
+}
+img{max-width:100%;display:block}
+a{color:var(--magenta-dark)}
+h1,h2,h3{font-family:var(--head);font-weight:400;line-height:1.25;margin:0;color:var(--ink)}
+p{margin:0}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+.ltr{direction:ltr;unicode-bidi:isolate}
+.wrap{max-width:1120px;margin-inline:auto;padding-inline:24px}
+
+/* skip link */
+.skip{position:absolute;inset-inline-start:16px;top:-60px;z-index:100;background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:500}
+.skip:focus{top:12px}
+
+/* header */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(252,239,243,.92);backdrop-filter:saturate(1.2) blur(8px);-webkit-backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid var(--border)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px}
+.brand{display:flex;flex-direction:column;text-decoration:none;color:var(--ink);line-height:1.2}
+.brand b{font-family:var(--head);font-weight:400;font-size:1.45rem;letter-spacing:.01em}
+.brand b span{color:var(--magenta)}
+.brand small{font-size:.78rem;color:var(--muted)}
+.nav ul{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:4px}
+.nav a{display:block;padding:8px 12px;border-radius:999px;color:var(--ink);text-decoration:none;font-size:.95rem}
+.nav a:hover{background:var(--bg-deep)}
+.nav a.cta-sm{background:var(--magenta);color:#fff;margin-inline-start:6px}
+.nav a.cta-sm:hover{background:var(--magenta-dark)}
+.menu-btn{display:none;font:inherit;background:var(--surface);color:var(--ink);border:1px solid var(--border);border-radius:999px;padding:8px 16px;cursor:pointer;align-items:center;gap:8px}
+.menu-btn .bars{width:18px;height:12px;position:relative;display:inline-block}
+.menu-btn .bars::before,.menu-btn .bars::after,.menu-btn .bars i{content:"";position:absolute;inset-inline:0;height:2px;background:currentColor;border-radius:2px}
+.menu-btn .bars::before{top:0}.menu-btn .bars i{top:5px}.menu-btn .bars::after{bottom:0}
+@media (max-width:900px){
+  .menu-btn{display:inline-flex}
+  .nav{position:absolute;inset-inline:0;top:100%;background:var(--bg);border-bottom:1px solid var(--border);display:none;padding:8px 16px 16px}
+  .nav.open{display:block}
+  .nav ul{flex-direction:column;align-items:stretch}
+  .nav a{padding:12px;border-radius:12px}
+  .nav a.cta-sm{margin:6px 0 0;text-align:center}
+}
+
+/* hero */
+.hero{padding:72px 0 40px}
+.hero .wrap{display:grid;gap:24px}
+.eyebrow{font-size:.85rem;font-weight:500;letter-spacing:.04em;color:var(--magenta-dark);display:inline-flex;align-items:center;gap:8px}
+.hero h1{font-size:clamp(2rem,5.2vw,3.6rem);max-width:17ch}
+.hero .sub{font-size:clamp(1.05rem,1.8vw,1.22rem);color:var(--ink-soft);max-width:60ch}
+.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:500;text-decoration:none;border-radius:999px;padding:14px 26px;border:2px solid transparent;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.btn-primary{background:var(--magenta);color:#fff}
+.btn-primary:hover{background:var(--magenta-dark)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:#fff}
+.hero-start{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.9rem;margin-top:24px}
+.hero-start .dot{width:12px;height:12px;border-radius:50%;border:2px dashed var(--line-off)}
+
+/* ============ JOURNEY / SIGNAL LINE (signature) ============ */
+.journey{position:relative;padding-inline-start:var(--gut);padding-bottom:24px}
+.signal{position:absolute;top:0;bottom:0;inset-inline-start:calc(var(--lx) - 1.5px);width:3px;pointer-events:none}
+.signal .track{position:absolute;inset:0;background:repeating-linear-gradient(to bottom,var(--line-off) 0 9px,transparent 9px 18px)}
+.signal .fill{position:absolute;inset:0;background:var(--magenta);border-radius:3px;transform-origin:top center;transform:scaleY(var(--p,1));will-change:transform}
+
+.chapter{position:relative;padding:56px 0}
+.node{
+  position:absolute;top:58px;
+  inset-inline-start:calc(var(--lx) - var(--gut) - var(--node)/2);
+  width:var(--node);height:var(--node);border-radius:50%;
+  background:var(--bg);border:3px dashed var(--line-off);
+  display:grid;place-items:center;
+  transition:background .35s,border-color .35s,box-shadow .35s;
+}
+.node::after{content:"";width:6px;height:6px;border-radius:50%;background:transparent;transition:background .35s}
+.node.on{border:3px solid var(--magenta);background:var(--surface);box-shadow:0 0 0 6px rgba(217,4,89,.12)}
+.node.on::after{background:var(--magenta)}
+.chap-label{font-size:.85rem;font-weight:500;color:var(--muted);margin-bottom:10px;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline}
+.chap-label .num{font-family:var(--head);color:var(--magenta-dark)}
+.chap-label .flow{color:var(--ink-soft)}
+.chapter h2{font-size:clamp(1.6rem,3.4vw,2.4rem);max-width:24ch}
+.lead{color:var(--ink-soft);max-width:62ch;margin-top:14px}
+
+/* chapter 1: channels */
+.channels{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:12px;margin-top:28px}
+.channel{background:var(--surface);border-radius:14px;padding:16px 18px;border:1px solid var(--border)}
+.channel h3{font-size:1.05rem;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0}
+.chips li{font-size:.85rem;background:var(--bg);border-radius:999px;padding:3px 10px;color:var(--ink-soft);overflow-wrap:anywhere}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px;margin-top:28px}
+.card{background:var(--surface);border-radius:var(--radius);padding:24px;border:1px solid var(--border);box-shadow:0 10px 24px -18px rgba(19,19,42,.35)}
+.card .k{font-family:var(--head);font-size:.9rem;color:var(--magenta-dark);margin-bottom:6px}
+.card h3{font-size:1.25rem;margin-bottom:10px}
+.card p{color:var(--ink-soft);font-size:1rem}
+.card p strong{color:var(--ink);font-weight:500;display:block;margin-bottom:4px}
+.card .chips{margin-top:16px}
+
+/* method steps: sub-nodes on the line */
+.steps{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:14px;max-width:720px}
+.step{position:relative;background:var(--surface);border-radius:14px;padding:16px 20px;border:1px solid var(--border);display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:baseline}
+.step .sn{font-family:var(--head);font-size:1.5rem;color:var(--magenta);grid-row:span 2;line-height:1}
+.step h3{font-size:1.15rem}
+.step p{color:var(--ink-soft);font-size:.98rem}
+.step .tick{position:absolute;top:22px;inset-inline-start:calc(var(--lx) - var(--gut) - 6px);width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px dashed var(--line-off);transition:background .3s,border-color .3s}
+.step .tick.on{background:var(--magenta);border:2px solid var(--magenta)}
+
+/* proof */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:16px;margin-top:28px;list-style:none;padding:0}
+.stat{background:var(--surface);border-radius:var(--radius);padding:22px 24px;border:1px solid var(--border)}
+.stat b{display:block;font-family:var(--head);font-weight:400;font-size:clamp(2rem,4vw,2.6rem);color:var(--ink);line-height:1.1}
+.stat span{color:var(--ink-soft);font-size:.98rem}
+.motto{margin-top:28px;font-family:var(--head);font-size:clamp(1.25rem,2.4vw,1.6rem);color:var(--magenta-dark)}
+
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:40px;align-items:center}
+.photo{position:relative;border-radius:28px;overflow:hidden;background:#E9C9D6;aspect-ratio:4/5;box-shadow:0 30px 60px -36px rgba(19,19,42,.55)}
+.photo img{width:100%;height:100%;object-fit:cover}
+.photo figcaption{position:absolute;inset-inline-start:16px;bottom:16px;background:var(--surface);color:var(--ink);font-family:var(--head);padding:8px 16px;border-radius:999px;font-size:1rem}
+.about .more{display:inline-flex;margin-top:22px;font-weight:500;text-decoration:none;border-bottom:2px solid currentColor;padding-bottom:2px}
+.about .more:hover{color:var(--magenta)}
+@media (max-width:820px){.about{grid-template-columns:1fr;gap:24px}.photo{max-width:360px}}
+
+/* contact */
+.contact{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:40px;align-items:start}
+.direct{display:grid;gap:10px;margin-top:24px}
+.direct a{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 18px;text-decoration:none;color:var(--ink);font-weight:500}
+.direct a:hover{border-color:var(--magenta)}
+.direct svg{flex:none;color:var(--magenta)}
+.form{background:var(--surface);border-radius:24px;padding:28px;border:2px solid var(--magenta);box-shadow:0 30px 60px -40px rgba(217,4,89,.6)}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:grid;gap:6px;margin-bottom:16px}
+.field label{font-weight:500;font-size:.95rem}
+.req{color:var(--magenta-dark)}
+.field input,.field textarea{width:100%;font:inherit;font-size:1rem;color:var(--ink);background:#FFF8FA;border:1.5px solid #CDB3C0;border-radius:12px;padding:12px 14px}
+.field input[dir="ltr"]{text-align:right}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus-visible,.field textarea:focus-visible{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--ink)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;color:var(--ink-soft);margin:4px 0 20px}
+.consent input{width:20px;height:20px;margin:3px 0 0;flex:none;accent-color:var(--magenta)}
+.form .btn{width:100%}
+.thanks{margin-top:16px;padding:14px 16px;border-radius:12px;background:#E7F6EE;color:#0E4D2C;font-weight:500}
+.thanks:empty{display:none}
+@media (max-width:820px){.contact{grid-template-columns:1fr;gap:24px}}
+@media (max-width:520px){.form .row{grid-template-columns:1fr;gap:0}.form{padding:20px}}
+
+/* footer */
+.site-footer{background:var(--ink);color:#E9E6F2;padding:40px 0 28px;margin-top:24px}
+.site-footer .wrap{display:grid;gap:20px}
+.site-footer p{color:#CFCBE0}
+.site-footer ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 20px}
+.site-footer a{color:#fff}
+.site-footer .brand b{color:#fff}
+.site-footer small{color:#B7B2CC}
+.site-footer :focus-visible{outline-color:#fff}
+
+/* mobile: line hugs the inline-start edge */
+@media (max-width:640px){
+  :root{--gut:40px;--lx:10px;--node:18px}
+  .wrap{padding-inline:16px}
+  .hero{padding:48px 0 24px}
+  .chapter{padding:40px 0}
+  .node{top:42px}
+  .card,.channel{padding:18px}
+  .step{padding:14px 16px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .signal .fill{transform:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">דלגו לתוכן</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="https://matching.co.il/" aria-label="Matching - דף הבית">
+      <b class="ltr"><span>M</span>atching</b>
+      <small>ייעוץ לצמיחה עסקית ואוטומציות AI</small>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="bars" aria-hidden="true"><i></i></span> תפריט
+    </button>
+    <nav class="nav" id="site-nav" aria-label="ניווט ראשי">
+      <ul>
+        <li><a href="https://matching.co.il/" aria-current="page">בית</a></li>
+        <li><a href="https://matching.co.il/שירותים/">מה אני עושה</a></li>
+        <li><a href="#method">איך זה עובד</a></li>
+        <li><a href="https://matching.co.il/blog/">חדשות מטא ו־AI</a></li>
+        <li><a href="https://matching.co.il/אודות/">אודות</a></li>
+        <li><a class="cta-sm" href="#contact">צור קשר</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <p class="eyebrow">ייעוץ לצמיחה עסקית ואוטומציות AI</p>
+      <h1 id="hero-title">יותר מכירות. פחות עבודה ידנית. מערכת אחת שעובדת נכון.</h1>
+      <p class="sub">אני מאבחנת ומחברת את האתר, הפרסום, המדידה והאוטומציות כדי לחשוף מה עוצר את הצמיחה ולבנות מערכת עסקית שעובדת יחד.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#contact">לקביעת שיחת אבחון</a>
+        <a class="btn btn-ghost" href="#method">איך זה עובד</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="journey" id="journey">
+      <div class="signal" aria-hidden="true"><div class="track"></div><div class="fill" id="signal-fill"></div></div>
+
+      <!-- 1. traffic arrives -->
+      <section class="chapter" aria-labelledby="ch1">
+        <span class="node" aria-hidden="true"></span>
+        <p class="chap-label"><span class="num">01</span> מעבדת האותות · תנועה מגיעה <span class="flow">(פרסום, חיפוש ומסחר)</span></p>
+        <h2 id="ch1">מגלים מדוע התנועה לא הופכת למכירות.</h2>
+        <div class="channels">
+          <div class="channel"><h3>פרסום</h3><ul class="chips"><li class="ltr">Meta Ads</li><li class="ltr">Google Ads</li></ul></div>
+          <div class="channel"><h3>נראות</h3><ul class="chips"><li class="ltr">SEO</li><li class="ltr">GEO</li><li class="ltr">Search Console</li><li class="ltr">Google Business</li></ul></div>
+          <div class="channel"><h3>מדידה</h3><ul class="chips"><li class="ltr">GA4</li><li class="ltr">GTM</li><li class="ltr">Pixel</li><li class="ltr">Conversion API</li></ul></div>
+          <div class="channel"><h3>מסחר</h3><ul class="chips"><li class="ltr">Merchant Center</li><li>קטלוגים</li><li>סל וקופה</li></ul></div>
+          <div class="channel"><h3>תהליכים</h3><ul class="chips"><li class="ltr">CRM</li><li>דיוור</li><li class="ltr">WhatsApp</li><li class="ltr">Bot</li><li class="ltr">AI</li></ul></div>
+        </div>
+      </section>
+
+      <!-- 2. the failure is revealed -->
+      <section class="chapter" aria-labelledby="ch2">
+        <span class="node" aria-hidden="true"></span>
+        <p class="chap-label"><span class="num">02</span> הכשל מתגלה <span class="flow">(חיכוך באתר ומדידה חלקית)</span></p>
+        <h2 id="ch2">לא תמיד צריך יותר תנועה. צריך מערכת שמנצלת אותה נכון.</h2>
+        <p class="lead">אם הקמפיינים מביאים לקוחות אבל המכירות לא גדלות בהתאם, הבעיה יכולה להיות באתר, במדידה או בתהליך שמגיע אחרי הקליק.</p>
+        <div class="cards">
+          <article class="card">
+            <p class="k">1</p>
+            <h3>אתר וחוויית רכישה</h3>
+            <p><strong>הלקוח מגיע, אבל מתקשה להשלים רכישה.</strong>מסע לא ברור, חיכוך בעמודי המוצר, סל מסורבל או קופה שלא בנויה למובייל.</p>
+          </article>
+          <article class="card">
+            <p class="k">2</p>
+            <h3>נתונים וממשקים</h3>
+            <p><strong>המערכות מדווחות תמונה חלקית.</strong>חיבורים חסרים בין האתר, <span class="ltr">Analytics</span>, <span class="ltr">Meta</span>, <span class="ltr">Google Ads</span> ו־<span class="ltr">Merchant Center</span>.</p>
+          </article>
+          <article class="card">
+            <p class="k">3</p>
+            <h3>שירות ותהליכים</h3>
+            <p><strong>לידים ולקוחות נופלים בין הכיסאות.</strong>דיוור, <span class="ltr">WhatsApp</span> ושירות לקוחות עובדים בנפרד במקום להמשיך את מסע הלקוח.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 3. the system connects -->
+      <section class="chapter" aria-labelledby="ch3">
+        <span class="node" aria-hidden="true"></span>
+        <p class="chap-label"><span class="num">03</span> המערכת מתחברת <span class="flow">(רכישה וצמיחה)</span></p>
+        <h2 id="ch3">שלושה תחומים. מערכת צמיחה אחת.</h2>
+        <p class="lead">המיקוד המרכזי הוא באתרי איקומרס, והשיטה מתאימה גם לעסקים קטנים ובינוניים ולארגונים גדולים שרוצים לחבר בין השיווק, האתר, הנתונים והעבודה היומיומית.</p>
+        <div class="cards">
+          <article class="card">
+            <h3>אבחון אתר ומערך המכירות</h3>
+            <p>בדיקה עסקית, טכנית ו־<span class="ltr">UX/UI</span> שמזהה מה מונע מהתנועה הקיימת להפוך להכנסות.</p>
+            <ul class="chips"><li>מסע לקוח והמרות</li><li>סל וקופה</li><li>ביצועים וחיבורי מדידה</li></ul>
+          </article>
+          <article class="card">
+            <h3>פיתוח עסקי באמצעות <span class="ltr">AI</span></h3>
+            <p>הפיכת ידע, משימות ומידע לתהליכים חכמים שמקצרים עבודה ומאפשרים לצמוח בלי להעמיס כוח אדם.</p>
+            <ul class="chips"><li>מיפוי הזדמנויות</li><li>סוכני <span class="ltr">AI</span> וכלי עבודה</li><li>בקרה והטמעה</li></ul>
+          </article>
+          <article class="card">
+            <h3>אוטומציות ושיפור תהליכים</h3>
+            <p>חיבור בין פרסום, דיוור, <span class="ltr">WhatsApp</span>, שירות ומערכות פנים ארגוניות לתהליך אחד מדיד.</p>
+            <ul class="chips"><li>לידים ולקוחות</li><li>שירות ושימור</li><li>תהליכים שיווקיים ופנימיים</li></ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- 4. method -->
+      <section class="chapter" id="method" aria-labelledby="ch4">
+        <span class="node" aria-hidden="true"></span>
+        <p class="chap-label"><span class="num">04</span> איך זה עובד</p>
+        <h2 id="ch4">רואים את כל התמונה. מתקנים לפי סדר ההשפעה.</h2>
+        <p class="lead">במקום להתחיל מכלי חדש, מתחילים מהשאלה העסקית: איפה כסף, זמן או לקוחות הולכים לאיבוד?</p>
+        <ol class="steps">
+          <li class="step"><span class="tick" aria-hidden="true"></span><span class="sn" aria-hidden="true">1</span><h3>אבחון</h3><p>נתונים, אתר, קמפיינים ותהליכי עבודה</p></li>
+          <li class="step"><span class="tick" aria-hidden="true"></span><span class="sn" aria-hidden="true">2</span><h3>תיעדוף</h3><p>מה ישפיע עכשיו על המכירות והיעילות</p></li>
+          <li class="step"><span class="tick" aria-hidden="true"></span><span class="sn" aria-hidden="true">3</span><h3>חיבור</h3><p>ממשקים, מערכות ואחריות בין צוותים</p></li>
+          <li class="step"><span class="tick" aria-hidden="true"></span><span class="sn" aria-hidden="true">4</span><h3>אוטומציה</h3><p>פחות עבודה ידנית, יותר עקביות ובקרה</p></li>
+          <li class="step"><span class="tick" aria-hidden="true"></span><span class="sn" aria-hidden="true">5</span><h3>מדידה</h3><p>בדיקה רציפה של התוצאות ושיפור</p></li>
+        </ol>
+      </section>
+
+      <!-- 5. proof -->
+      <section class="chapter" aria-labelledby="ch5">
+        <span class="node" aria-hidden="true"></span>
+        <p class="chap-label"><span class="num">05</span> הוכחות</p>
+        <h2 id="ch5">החלטות עסקיות צריכות להישען על הוכחות.</h2>
+        <p class="lead">לכן אני בוחנת את נתוני המכירות, איכות המדידה והתהליך בפועל, ומתרגמת אותם לסדר פעולות ברור שאפשר למדוד ולשפר.</p>
+        <ul class="stats">
+          <li class="stat"><b><bdi dir="ltr">10+</bdi></b><span>שנות ניסיון</span></li>
+          <li class="stat"><b><bdi dir="ltr">120+</bdi></b><span>עסקים</span></li>
+          <li class="stat"><b>כ־<bdi dir="ltr">40%</bdi></b><span>עלייה במכירות (בתהליך שנמדד)</span></li>
+        </ul>
+        <p class="motto">מאתרים. מחברים. צומחים.</p>
+      </section>
+
+      <!-- 6. about -->
+      <section class="chapter" aria-labelledby="ch6">
+        <span class="node" aria-hidden="true"></span>
+        <div class="about">
+          <figure class="photo" style="margin:0">
+            <img src="https://matching.co.il/wp-content/uploads/2026/03/WhatsApp-Image-2026-03-25-at-11.50.41-PM.jpeg" alt="קרן הראל" width="720" height="900" loading="lazy">
+            <figcaption>קרן הראל</figcaption>
+          </figure>
+          <div>
+            <p class="chap-label"><span class="num">06</span> מי מחברת את הקצוות</p>
+            <h2 id="ch6">לראות את העסק כמערכת אחת.</h2>
+            <p class="lead">אני מחברת בין נקודת המבט העסקית, חוויית המשתמש, מערכות הפרסום, הנתונים והאוטומציות. עם יותר מעשר שנות ניסיון וליווי של יותר מ־120 עסקים, אני נכנסת לעומק המערכת כדי לזהות את החסם האמיתי, לבנות סדר עדיפויות ולוודא שהכלים עובדים עבור העסק, ולא להפך.</p>
+            <a class="more" href="https://matching.co.il/אודות/">להכיר אותי לעומק ←</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. contact -->
+      <section class="chapter" id="contact" aria-labelledby="ch7">
+        <span class="node" aria-hidden="true"></span>
+        <div class="contact">
+          <div>
+            <p class="chap-label"><span class="num">07</span> שיחת אבחון</p>
+            <h2 id="ch7">בואו נגלה מה באמת עוצר את הצמיחה.</h2>
+            <p class="lead">שיחת האבחון הראשונית נועדה להבין את התמונה ולבחור את המקום הראשון שכדאי לטפל בו.</p>
+            <div class="direct">
+              <a href="tel:0544421161">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+                <span>טלפון: <bdi dir="ltr">054-4421161</bdi></span>
+              </a>
+              <a href="https://wa.me/972544421161" target="_blank" rel="noopener">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg>
+                <span>שיחה ב־<span class="ltr">WhatsApp</span></span>
+              </a>
+            </div>
+          </div>
+
+          <form class="form" id="lead-form" aria-labelledby="ch7">
+            <div class="row">
+              <div class="field">
+                <label for="f-company">חברה</label>
+                <input id="f-company" name="company" type="text" autocomplete="organization">
+              </div>
+              <div class="field">
+                <label for="f-name">שם מלא <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-name" name="name" type="text" autocomplete="name" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="f-phone">טלפון <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-phone" name="phone" type="tel" dir="ltr" autocomplete="tel" inputmode="tel" required>
+              </div>
+              <div class="field">
+                <label for="f-site">כתובת האתר</label>
+                <input id="f-site" name="website" type="url" dir="ltr" autocomplete="url" placeholder="https://">
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-msg">מה האתגר המרכזי כרגע?</label>
+              <textarea id="f-msg" name="message"></textarea>
+            </div>
+            <div class="consent">
+              <input id="f-consent" name="consent" type="checkbox" required>
+              <label for="f-consent">קראתי את <a href="https://matching.co.il/privacy-policy/">מדיניות הפרטיות</a> ואני מסכים/ה להעברת הפרטים לצורך יצירת קשר. <span class="req" aria-hidden="true">*</span></label>
+            </div>
+            <button class="btn btn-primary" type="submit">שלחו לי את הפרטים</button>
+            <p class="thanks" id="thanks" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <a class="brand" href="https://matching.co.il/"><b class="ltr">Matching</b></a>
+    <p>ייעוץ לצמיחה עסקית באמצעות נתונים, AI ואוטומציות</p>
+    <nav aria-label="קישורי תחתית">
+      <ul>
+        <li><a href="https://matching.co.il/blog/">תובנות</a></li>
+        <li><a href="https://matching.co.il/privacy-policy/">מדיניות פרטיות</a></li>
+        <li><a href="https://matching.co.il/cookie-policy/">מדיניות קוקיז</a></li>
+        <li><a href="https://matching.co.il/terms/">תנאי שימוש</a></li>
+        <li><a href="https://matching.co.il/accessibility/">נגישות</a></li>
+      </ul>
+    </nav>
+    <small>© <span class="ltr">Matching</span></small>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* mobile menu */
+  var btn=document.querySelector('.menu-btn'), nav=document.getElementById('site-nav');
+  if(btn&&nav){
+    btn.addEventListener('click',function(){
+      var open=btn.getAttribute('aria-expanded')==='true';
+      btn.setAttribute('aria-expanded',String(!open));
+      nav.classList.toggle('open',!open);
+    });
+    nav.addEventListener('click',function(e){
+      if(e.target.closest('a')&&btn.getAttribute('aria-expanded')==='true'){
+        btn.setAttribute('aria-expanded','false');nav.classList.remove('open');
+      }
+    });
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape'&&btn.getAttribute('aria-expanded')==='true'){
+        btn.setAttribute('aria-expanded','false');nav.classList.remove('open');btn.focus();
+      }
+    });
+  }
+
+  /* signal line: broken -> connected as the visitor scrolls */
+  var journey=document.getElementById('journey'), fill=document.getElementById('signal-fill');
+  var marks=[].slice.call(journey.querySelectorAll('.node,.tick'));
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+  var ticking=false;
+
+  function allOn(){
+    fill.style.setProperty('--p','1');
+    marks.forEach(function(m){m.classList.add('on');});
+  }
+  function update(){
+    ticking=false;
+    if(reduce.matches){allOn();return;}
+    var r=journey.getBoundingClientRect();
+    var probe=window.innerHeight*0.62;
+    var h=r.height||1;
+    var reached=probe-r.top;
+    var p=Math.max(0,Math.min(1,reached/h));
+    var doc=document.documentElement;
+    if(window.scrollY+window.innerHeight>=doc.scrollHeight-4) p=1;
+    /* snap to fully connected once the form section is well in view */
+    var contact=document.getElementById('contact').getBoundingClientRect();
+    if(contact.top<window.innerHeight*0.5) p=1;
+    fill.style.setProperty('--p',p.toFixed(4));
+    var filled=p*h;
+    marks.forEach(function(m){
+      var mr=m.getBoundingClientRect();
+      var y=mr.top+mr.height/2-r.top;
+      m.classList.toggle('on',y<=filled+1);
+    });
+  }
+  function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(update);}}
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  if(reduce.addEventListener) reduce.addEventListener('change',update);
+  update();
+
+  /* form: prototype only, never sends data */
+  var form=document.getElementById('lead-form'), thanks=document.getElementById('thanks');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!form.checkValidity()){form.reportValidity();return;}
+    var name=(form.elements.name.value||'').trim();
+    thanks.textContent='תודה'+(name?', '+name:'')+'! הפרטים התקבלו ואחזור אליכם בהקדם לתיאום שיחת האבחון.';
+    form.reset();
+    allOn();
+  });
+})();
+</script>
+</body>
+</html>

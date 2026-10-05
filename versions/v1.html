@@ -641,7 +641,7 @@ section{scroll-margin-top:84px}
     var n=document.createElement('span');n.className='mono';n.textContent=leaking+'/5';
     countEl.appendChild(n);
     var t=' אותות דולפים';
-    if(broken.length&&unsure.length)t+=' ('+broken.length+' שבורים, '+unsure.length+' לא בטוחים)';
+    if(broken.length&&unsure.length)t+=' ('+(broken.length===1?'אחד שבור':broken.length+' שבורים')+', '+(unsure.length===1?'אחד לא בטוח':unsure.length+' לא בטוחים')+')';
     else if(broken.length)t+=' ('+(broken.length===1?'אחד שבור':broken.length+' שבורים')+')';
     else if(unsure.length)t+=' ('+(unsure.length===1?'אחד לא בטוח':unsure.length+' לא בטוחים')+')';
     if(marked<5)t+=' · סומנו '+marked+' מתוך 5';
@@ -680,7 +680,7 @@ section{scroll-margin-top:84px}
   document.getElementById('lab-cta').addEventListener('click',function(){
     if(lastSummary){
       challenge.value=lastSummary;
-      note.textContent='מילאנו כאן את תוצאות מעבדת האותות. אפשר לערוך.';
+      note.textContent='תוצאות מעבדת האותות הועתקו לכאן. אפשר לערוך.';
     }
     var target=document.getElementById('contact');
     target.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
